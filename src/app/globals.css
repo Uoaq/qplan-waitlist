@@ -1,26 +1,238 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ─── Backgrounds ─── */
+  --bg-main: #0F1923;
+  --bg-surface: #162231;
+  --surface-raised: rgba(255,255,255,0.03);
+  --surface-divider: rgba(148,163,184,0.08);
+
+  /* ─── Text ─── */
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --text-body: #CBD5E1;
+  --text-dim: #475569;
+
+  /* ─── Accents ─── */
+  --accent: #B86B3E;
+  --accent-cyan: #22D3EE;
+  --accent-cyan-glow: rgba(34,211,238,0.08);
+  --accent-gradient: linear-gradient(135deg, #B86B3E 0%, #A05A32 100%);
+
+  /* ─── Glass ─── */
+  --glass-bg: rgba(255,255,255,0.03);
+  --glass-blur: blur(20px);
+  --glass-border: 1px solid rgba(255,255,255,0.06);
+  --glass-highlight: inset 0 1px 0 rgba(255,255,255,0.05);
+  --glass-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  --glass-hover-shadow: 0 8px 32px rgba(34,211,238,0.15);
+
+  /* ─── Buttons ─── */
+  --btn-primary-bg: var(--accent);
+  --btn-primary-text: #FFFFFF;
+  --btn-ghost-border: 1px solid rgba(148,163,184,0.12);
+
+  /* ─── Radius ─── */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  /* ─── Sidebar / Header ─── */
+  --sidebar-bg: rgba(15,25,35,0.85);
+  --header-bg: rgba(15,25,35,0.6);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--bg-main);
+  --color-foreground: var(--text-primary);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-main);
+  color: var(--text-primary);
+  font-family: 'Inter', var(--font-sans), system-ui, sans-serif;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Glass Card ─── */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-highlight), var(--glass-shadow);
+  transition: box-shadow 0.3s cubic-bezier(0.23,1,0.32,1),
+              transform 0.3s cubic-bezier(0.23,1,0.32,1);
+}
+.glass-card:hover {
+  box-shadow: var(--glass-highlight), var(--glass-hover-shadow);
+  transform: translateY(-2px);
+}
+
+/* ─── Background Orbs ─── */
+.orbs {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.18;
+}
+.orb--1 {
+  width: 600px;
+  height: 600px;
+  background: #22D3EE;
+  top: -200px;
+  right: -200px;
+}
+.orb--2 {
+  width: 500px;
+  height: 500px;
+  background: #E8722A;
+  bottom: -200px;
+  left: -200px;
+}
+
+/* ─── Buttons ─── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 32px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border-radius: 2px !important;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.23,1,0.32,1);
+  text-decoration: none;
+  color: var(--btn-primary-text);
+  background: var(--btn-primary-bg);
+}
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 24px rgba(232,114,42,0.3);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid rgba(148,163,184,0.2);
+  border-radius: 2px !important;
+  padding: 12px 32px;
+  font-size: 14px;
+}
+.btn-outline:hover {
+  border-color: rgba(148,163,184,0.35);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+/* ─── UK Map Draw Animation ─── */
+.uk-outline {
+  fill: none;
+  stroke: #22D3EE;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
+  animation: drawUK 4s cubic-bezier(0.4,0,0.2,1) forwards;
+  filter: drop-shadow(0 0 6px rgba(34,211,238,0.4));
+}
+@keyframes dialogIn {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes drawUK {
+  to { stroke-dashoffset: 0; }
+}
+.uk-city {
+  fill: #22D3EE;
+  opacity: 0;
+  animation: cityPulse 2s ease-in-out infinite;
+}
+.uk-city--london { animation-delay: 4s; }
+.uk-city--manchester { animation-delay: 4.3s; }
+.uk-city--birmingham { animation-delay: 4.6s; }
+.uk-city--edinburgh { animation-delay: 4.9s; }
+.uk-city--bristol { animation-delay: 5.2s; }
+.uk-city--leeds { animation-delay: 5.5s; }
+.uk-city--cardiff { animation-delay: 4.15s; }
+.uk-city--southampton { animation-delay: 4.45s; }
+.uk-city--norwich { animation-delay: 4.75s; }
+.uk-city--plymouth { animation-delay: 5.05s; }
+.uk-city--glasgow { animation-delay: 5.35s; }
+.uk-city--liverpool { animation-delay: 4.1s; }
+.uk-city--nottingham { animation-delay: 4.55s; }
+.uk-city--cambridge { animation-delay: 4.85s; }
+.uk-city--belfast { animation-delay: 5.15s; }
+.uk-city--aberdeen { animation-delay: 5.45s; }
+.uk-city--brighton { animation-delay: 4.25s; }
+.uk-city--exeter { animation-delay: 4.65s; }
+@keyframes cityPulse {
+  0%, 100% { opacity: 0.4; r: 2.5; }
+  50% { opacity: 0.9; r: 4; }
+}
+.uk-city-ring {
+  fill: none;
+  stroke: rgba(34,211,238,0.3);
+  stroke-width: 0.5;
+  opacity: 0;
+  animation: ringExpand 3s ease-out infinite;
+}
+.uk-city-ring--london { animation-delay: 4s; }
+.uk-city-ring--manchester { animation-delay: 4.3s; }
+.uk-city-ring--birmingham { animation-delay: 4.6s; }
+.uk-city-ring--edinburgh { animation-delay: 4.9s; }
+.uk-city-ring--bristol { animation-delay: 5.2s; }
+.uk-city-ring--leeds { animation-delay: 5.5s; }
+@keyframes ringExpand {
+  0% { opacity: 0.6; r: 3; }
+  100% { opacity: 0; r: 12; }
+}
+.uk-grid-line {
+  stroke: rgba(34,211,238,0.04);
+  stroke-width: 0.5;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .walkthrough-step {
+    flex-direction: column !important;
+    gap: 24px !important;
+  }
+  .walkthrough-step > div:first-child {
+    flex: 1 1 auto !important;
+  }
+  .risk-spectrum-grid {
+    grid-template-columns: 1fr !important;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .grid-3col {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ─── Selection ─── */
+::selection {
+  background: rgba(34,211,238,0.25);
+  color: var(--text-primary);
 }
