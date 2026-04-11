@@ -4,6 +4,7 @@ import { UKMap } from "@/components/uk-map";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { WaitlistDialog } from "@/components/waitlist-dialog";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { FaqItem } from "@/components/faq-item";
 
 export default function Home() {
   return (
@@ -820,6 +821,74 @@ export default function Home() {
               </div>
             </ScrollReveal>
           ))}
+        </div>
+      </section>
+
+      {/* ─── FAQ ─── */}
+      <section style={{ padding: "100px 24px", maxWidth: 720, margin: "0 auto", position: "relative", zIndex: 2 }}>
+        <ScrollReveal>
+          <p
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 12,
+              fontWeight: 600,
+              textTransform: "uppercase",
+              letterSpacing: "0.12em",
+              color: "var(--accent-cyan)",
+              marginBottom: 12,
+              textAlign: "center",
+            }}
+          >
+            FAQ
+          </p>
+          <h2
+            style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontWeight: 700,
+              fontSize: "clamp(1.6rem, 3vw, 2.2rem)",
+              color: "var(--text-primary)",
+              textAlign: "center",
+              lineHeight: 1.2,
+              marginBottom: 48,
+            }}
+          >
+            Frequently asked questions
+          </h2>
+        </ScrollReveal>
+
+        <div style={{ borderTop: "1px solid rgba(148,163,184,0.1)" }}>
+          <FaqItem
+            question="What is a site viability assessment?"
+            answer="A site viability assessment evaluates whether a proposed development is feasible by analysing planning constraints, policy compliance, environmental designations, and local authority requirements. QPlan automates this by screening 29 government constraint datasets in under 60 seconds."
+          />
+          <FaqItem
+            question="How accurate are the constraint checks?"
+            answer="QPlan sources data directly from authoritative government datasets including planning.data.gov.uk, Historic England, the Environment Agency, and Natural England. The constraint data is as accurate as the underlying government records — we do not estimate or interpolate."
+          />
+          <FaqItem
+            question="What do I need to get started?"
+            answer="Just a UK postcode or site address. QPlan handles the rest — identifying the site boundary, querying constraint datasets, analysing relevant planning policies, and generating a viability summary with risk flags."
+          />
+          <FaqItem
+            question="Which application types are supported?"
+            answer="QPlan supports screening for all major application types including householder extensions, full planning applications, outline planning, change of use, listed building consent, and large-scale residential or commercial developments."
+          />
+          <FaqItem
+            question="How long does a report take to generate?"
+            answer="Most reports are generated in under 60 seconds. Complex sites with multiple overlapping constraints may take slightly longer as the system cross-references additional policy frameworks."
+          />
+          <FaqItem
+            question="Can I use QPlan for sites anywhere in England?"
+            answer="Yes. QPlan covers all local planning authorities in England. Coverage for Wales, Scotland, and Northern Ireland is on our roadmap and will be added as government data sources become available."
+          />
+          <FaqItem
+            question="Is QPlan a replacement for a planning consultant?"
+            answer="No. QPlan is a screening and intelligence tool designed to complement professional advice, not replace it. It helps consultants, developers, and landowners make faster, better-informed decisions about whether to progress with a site — saving time and reducing abortive costs."
+          />
+          <FaqItem
+            question="How is QPlan different from a planning portal search?"
+            answer="Planning portal searches show individual constraints one at a time. QPlan aggregates 29 datasets simultaneously, cross-references them against relevant planning policy, and delivers a single viability verdict with risk scoring — turning hours of manual research into seconds."
+          />
         </div>
       </section>
 
