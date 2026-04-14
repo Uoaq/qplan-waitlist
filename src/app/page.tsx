@@ -193,114 +193,117 @@ export default function Home() {
           </ScrollReveal>
         </div>
 
-        {/* Step 1 */}
+        {/* Step 1 — Conversational Briefing */}
         <div className="walkthrough-panel" style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "80px 24px" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "center" }}>
             <ScrollReveal>
               <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 13, color: "var(--accent-cyan)", letterSpacing: "0.05em", marginBottom: 16 }}>01</div>
               <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 28, color: "var(--text-primary)", marginBottom: 16, lineHeight: 1.2 }}>
-                Start with a postcode
+                Brief through conversation
               </h3>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.75 }}>
-                Enter your site&apos;s postcode and describe your proposal. The system guides you through the process — no complex forms, just a conversation. It captures everything needed for a full site assessment.
+                No forms. Chat naturally with a planning-specialist assistant that captures your site address, proposal type, and development intent. It extracts entities, triggers planning history lookups, and builds your project brief in real time.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={150}>
               <div className="glass-card" style={{ overflow: "hidden", borderRadius: "var(--radius-lg)" }}>
-                <Image src="/screenshots/chat.png" alt="Q Plan chat interface for site assessment" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block" }} priority />
+                <Image src="/screenshots/ui-chat.png" alt="QPlan conversational briefing interface" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block" }} priority />
               </div>
             </ScrollReveal>
           </div>
         </div>
 
-        {/* Step 2 */}
+        {/* Step 2 — Constraint Map */}
         <div className="walkthrough-panel" style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "80px 24px" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1.4fr 1fr", gap: 64, alignItems: "center" }}>
             <ScrollReveal>
               <div className="glass-card" style={{ overflow: "hidden", borderRadius: "var(--radius-lg)" }}>
-                <Image src="/screenshots/map.png" alt="Q Plan interactive constraint map with layer overlays" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block" }} />
+                <Image src="/screenshots/ui-map.png" alt="QPlan interactive constraint map with layer overlays" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block" }} />
               </div>
             </ScrollReveal>
             <ScrollReveal delay={150}>
               <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 13, color: "var(--accent-cyan)", letterSpacing: "0.05em", marginBottom: 16 }}>02</div>
               <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 28, color: "var(--text-primary)", marginBottom: 16, lineHeight: 1.2 }}>
-                29 constraint datasets, checked instantly
+                19 constraint layers, mapped instantly
               </h3>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.75 }}>
-                The pipeline queries planning.data.gov.uk in real-time. Flood zones, Green Belt, conservation areas, listed buildings, SSSI, ancient woodland — all overlaid on an interactive constraint map.
+                The pipeline queries 19 government data sources in parallel — flood zones, Green Belt, conservation areas, listed buildings, SSSI, ancient woodland, mining risk, and more. Every constraint overlaid on an interactive map with toggleable layers.
               </p>
             </ScrollReveal>
           </div>
         </div>
 
-        {/* Step 3 */}
+        {/* Step 3 — Assessment Results */}
         <div className="walkthrough-panel" style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "80px 24px" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "center" }}>
             <ScrollReveal>
               <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 13, color: "var(--accent-cyan)", letterSpacing: "0.05em", marginBottom: 16 }}>03</div>
               <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 28, color: "var(--text-primary)", marginBottom: 16, lineHeight: 1.2 }}>
-                A clear risk verdict
+                Risk verdict with full breakdown
               </h3>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.75 }}>
-                Every report delivers a professional risk score and go/no-go verdict. Green means proceed with confidence. Amber means proceed with caution. Red means walk away. No ambiguity — just a clear recommendation backed by data.
+                Every assessment delivers a professional risk score, constraint count, estimated survey costs, and a clear go/no-go verdict. Heritage screening, BNG compliance, and 7-dimension risk scoring run automatically through specialist agents.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={150}>
               <div className="glass-card" style={{ overflow: "hidden", borderRadius: "var(--radius-lg)" }}>
-                <Image src="/screenshots/sample-green-light.png" alt="Q Plan GREEN risk score report" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block" }} />
+                <Image src="/screenshots/ui-results.png" alt="QPlan assessment results with AMBER verdict" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block" }} />
               </div>
             </ScrollReveal>
           </div>
         </div>
 
-        {/* Step 4 */}
+        {/* Step 4 — Professional Reports */}
         <div className="walkthrough-panel" style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "80px 24px" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1.4fr 1fr", gap: 64, alignItems: "center" }}>
             <ScrollReveal>
               <div className="glass-card" style={{ overflow: "hidden", borderRadius: "var(--radius-lg)" }}>
-                <Image src="/screenshots/report.png" alt="Q Plan assessment report with constraint breakdown" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block" }} />
+                <Image src="/screenshots/ui-report.png" alt="QPlan branded PDF report preview" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block" }} />
               </div>
             </ScrollReveal>
             <ScrollReveal delay={150}>
               <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 13, color: "var(--accent-cyan)", letterSpacing: "0.05em", marginBottom: 16 }}>04</div>
               <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 28, color: "var(--text-primary)", marginBottom: 16, lineHeight: 1.2 }}>
-                The full constraint breakdown
+                Professional branded reports
               </h3>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.75 }}>
-                Every constraint identified, with NPPF policy references, survey requirements, and estimated costs. No guesswork — just the structured data your planning consultant needs to advise on viability.
+                Export to branded Word (.docx), PDF, or Excel with auto-generated table of contents, numbered sections, policy citations, compliance matrices, heritage and BNG appendices, and colour-coded scoring. Client-ready from day one.
               </p>
             </ScrollReveal>
           </div>
         </div>
 
-        {/* Step 5 — Risk spectrum */}
+        {/* Step 5 — Bulk Upload & Policy Library */}
         <div className="walkthrough-panel" style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "80px 24px" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto", textAlign: "center" }}>
             <ScrollReveal>
               <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 13, color: "var(--accent-cyan)", letterSpacing: "0.05em", marginBottom: 16 }}>05</div>
               <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 28, color: "var(--text-primary)", marginBottom: 12, lineHeight: 1.2 }}>
-                See the full risk spectrum
+                Bulk screening &amp; policy library
               </h3>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.7, maxWidth: 560, margin: "0 auto 48px" }}>
-                Three real sites. Three different outcomes. From a clean brownfield green light to an insurmountable floodplain red flag — every report gives you the clarity to make the right call.
+                Upload CSV files to batch-assess up to 100 sites at once with progress tracking. Browse indexed planning policies by local authority with semantic search across every LPA in England.
               </p>
             </ScrollReveal>
-            <div className="risk-spectrum-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
-              {[
-                { src: "/screenshots/sample-green-light.png", alt: "GREEN risk score — 11/100", badge: "GREEN \u00b7 11/100", badgeBg: "rgba(34,197,94,0.12)", badgeColor: "#22c55e", desc: "Brownfield green light — proceed with confidence", delay: 0 },
-                { src: "/screenshots/sample-amber-heritage.png", alt: "AMBER risk score — 42/100", badge: "AMBER \u00b7 42/100", badgeBg: "rgba(245,158,11,0.12)", badgeColor: "#f59e0b", desc: "Cotswold heritage village — proceed with caution", delay: 150 },
-                { src: "/screenshots/sample-red-floodplain.png", alt: "RED risk score — 82/100", badge: "RED \u00b7 82/100", badgeBg: "rgba(239,68,68,0.12)", badgeColor: "#ef4444", desc: "Floodplain red flag — do not proceed", delay: 300 },
-              ].map((card) => (
-                <ScrollReveal key={card.badge} delay={card.delay}>
-                  <div className="glass-card" style={{ overflow: "hidden", borderRadius: "var(--radius-lg)" }}>
-                    <Image src={card.src} alt={card.alt} width={1440} height={900} style={{ width: "100%", height: "auto", display: "block", borderBottom: "var(--glass-border)" }} />
-                    <div style={{ padding: "16px 20px" }}>
-                      <span style={{ display: "inline-block", padding: "3px 10px", borderRadius: 6, fontSize: 12, fontWeight: 700, fontFamily: "'Inter', sans-serif", background: card.badgeBg, color: card.badgeColor, marginBottom: 6 }}>{card.badge}</span>
-                      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.5 }}>{card.desc}</p>
-                    </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20, maxWidth: 1000, margin: "0 auto" }}>
+              <ScrollReveal delay={0}>
+                <div className="glass-card" style={{ overflow: "hidden", borderRadius: "var(--radius-lg)" }}>
+                  <Image src="/screenshots/ui-bulk.png" alt="QPlan bulk CSV upload with batch processing" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block", borderBottom: "var(--glass-border)" }} />
+                  <div style={{ padding: "14px 20px" }}>
+                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>Bulk Upload</p>
+                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "var(--text-secondary)" }}>Batch-assess up to 100 sites via CSV</p>
                   </div>
-                </ScrollReveal>
-              ))}
+                </div>
+              </ScrollReveal>
+              <ScrollReveal delay={150}>
+                <div className="glass-card" style={{ overflow: "hidden", borderRadius: "var(--radius-lg)" }}>
+                  <Image src="/screenshots/ui-policy-library.png" alt="QPlan policy library browser by local authority" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block", borderBottom: "var(--glass-border)" }} />
+                  <div style={{ padding: "14px 20px" }}>
+                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>Policy Library</p>
+                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "var(--text-secondary)" }}>Browse indexed policies by LPA</p>
+                  </div>
+                </div>
+              </ScrollReveal>
             </div>
           </div>
         </div>
@@ -311,15 +314,15 @@ export default function Home() {
             <ScrollReveal>
               <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 13, color: "var(--accent-cyan)", letterSpacing: "0.05em", marginBottom: 16 }}>06</div>
               <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 28, color: "var(--text-primary)", marginBottom: 12, lineHeight: 1.2 }}>
-                Your planning intelligence dashboard
+                Your command centre
               </h3>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.7, maxWidth: 560, margin: "0 auto 48px" }}>
-                Track all your assessments in one place. See risk scores at a glance, manage projects across multiple sites, and access your full report library.
+                Track every assessment from one dashboard. Project stats, recent assessments with risk badges, quick actions, and your top LPA — all at a glance. Manage, archive, and share reports across your team.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={150}>
               <div className="glass-card" style={{ overflow: "hidden", borderRadius: "var(--radius-lg)", maxWidth: 1000, margin: "0 auto" }}>
-                <Image src="/screenshots/dashboard.png" alt="Q Plan planning intelligence dashboard" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block" }} />
+                <Image src="/screenshots/ui-dashboard.png" alt="QPlan planning intelligence dashboard" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block" }} />
               </div>
             </ScrollReveal>
           </div>
