@@ -8,13 +8,13 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Q Plan — AI-Powered Site Viability Screening",
+  title: "Q Plan — Planning Intelligence Platform",
   description:
-    "Screen any UK planning site for constraints, risk, and viability — in seconds. 29 government constraint datasets. Professional PDF reports. Built for planning consultants, developers, and land agents.",
+    "Screen any UK planning site for constraints, risk, and viability — in seconds. 30+ government data integrations. Feasibility appraisals, planning statements, and professional PDF reports. Built for planning consultants, developers, and land agents.",
   openGraph: {
-    title: "Q Plan — AI-Powered Site Viability Screening",
+    title: "Q Plan — Planning Intelligence Platform",
     description:
-      "Screen any UK planning site for constraints, risk, and viability — in seconds.",
+      "Site screening, feasibility appraisals, and professional reports — 30+ government data integrations, from postcode to PDF in minutes.",
     type: "website",
   },
 };

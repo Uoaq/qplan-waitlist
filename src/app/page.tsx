@@ -163,7 +163,7 @@ export default function Home() {
         >
           The complete planning intelligence platform — from site screening
           and constraint analysis to feasibility appraisals, planning statements,
-          and professional reports. Powered by 19 government data integrations.
+          and professional reports. Powered by 30+ government data integrations.
         </p>
 
         <div style={{ position: "relative", zIndex: 3, display: "flex", alignItems: "center", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
@@ -224,10 +224,10 @@ export default function Home() {
             <ScrollReveal delay={150}>
               <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 13, color: "var(--accent-cyan)", letterSpacing: "0.05em", marginBottom: 16 }}>02</div>
               <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 28, color: "var(--text-primary)", marginBottom: 16, lineHeight: 1.2 }}>
-                19 constraint layers, mapped instantly
+                30+ constraint layers, mapped instantly
               </h3>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.75 }}>
-                The pipeline queries 19 government data sources in parallel — flood zones, Green Belt, conservation areas, listed buildings, SSSI, ancient woodland, mining risk, and more. Every constraint overlaid on an interactive map with toggleable layers.
+                The pipeline queries 30+ government data sources in parallel — flood zones, Green Belt, conservation areas, listed buildings, SSSI, ancient woodland, mining risk, heritage at risk, and more. Vector tiles from planning.data.gov.uk, plus Environment Agency, Natural England, Historic England, and Coal Authority adapters. Every constraint overlaid on an interactive map with toggleable layers.
               </p>
             </ScrollReveal>
           </div>
@@ -242,7 +242,7 @@ export default function Home() {
                 Risk verdict with full breakdown
               </h3>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.75 }}>
-                Every assessment delivers a professional risk score, constraint count, estimated survey costs, and a clear go/no-go verdict. Heritage screening, BNG compliance, and 7-dimension risk scoring run automatically through specialist agents.
+                Every assessment delivers a professional risk score, constraint count, estimated survey costs, and a clear go/no-go verdict. Heritage screening, BNG compliance, grey belt eligibility (NPPF Dec 2024), and 7-dimension risk scoring run automatically through specialist agents.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={150}>
@@ -282,7 +282,7 @@ export default function Home() {
                 Bulk screening &amp; policy library
               </h3>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.7, maxWidth: 560, margin: "0 auto 48px" }}>
-                Upload CSV files to batch-assess up to 100 sites at once with progress tracking. Browse indexed planning policies by local authority with semantic search across every LPA in England.
+                Upload CSV, Excel, JSON, or plain text files to batch-assess up to 500 sites at once with progress tracking. Browse indexed planning policies across 50 local authority configurations with semantic search.
               </p>
             </ScrollReveal>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20, maxWidth: 1000, margin: "0 auto" }}>
@@ -317,13 +317,53 @@ export default function Home() {
                 Your command centre
               </h3>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.7, maxWidth: 560, margin: "0 auto 48px" }}>
-                Track every assessment from one dashboard. Project stats, recent assessments with risk badges, quick actions, and your top LPA — all at a glance. Manage, archive, and share reports across your team.
+                Track every assessment from one dashboard. Three assessment types — Site Screen, Feasibility, and Full Viability — with project stats, quick-launch tools, bulk upload, and your top LPA at a glance. Manage, archive, and share reports across your team.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={150}>
               <div className="glass-card" style={{ overflow: "hidden", borderRadius: "var(--radius-lg)", maxWidth: 1000, margin: "0 auto" }}>
                 <Image src="/screenshots/ui-dashboard.png" alt="QPlan planning intelligence dashboard" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block" }} />
               </div>
+            </ScrollReveal>
+          </div>
+        </div>
+
+        {/* Step 7 — Feasibility Appraisal */}
+        <div className="walkthrough-panel" style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "80px 24px" }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 64, alignItems: "center" }}>
+            <ScrollReveal>
+              <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 13, color: "var(--accent-cyan)", letterSpacing: "0.05em", marginBottom: 16 }}>07</div>
+              <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 28, color: "var(--text-primary)", marginBottom: 16, lineHeight: 1.2 }}>
+                Financial feasibility appraisal
+              </h3>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.75 }}>
+                RICS-aligned residual appraisal with multi-option financial modelling. GDV calculation, BCIS build costs, CIL liability, SDLT, disposal costs, bridging finance, and profit-on-cost analysis across development scenarios — with sensitivity testing and Excel export.
+              </p>
+            </ScrollReveal>
+            <ScrollReveal delay={150}>
+              <div className="glass-card" style={{ overflow: "hidden", borderRadius: "var(--radius-lg)" }}>
+                <Image src="/screenshots/ui-feasibility.png" alt="QPlan feasibility appraisal with financial KPIs and viability verdict" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block" }} />
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+
+        {/* Step 8 — Full Viability Assessment (FVA) */}
+        <div className="walkthrough-panel" style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "80px 24px" }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1.4fr 1fr", gap: 64, alignItems: "center" }}>
+            <ScrollReveal>
+              <div className="glass-card" style={{ overflow: "hidden", borderRadius: "var(--radius-lg)" }}>
+                <Image src="/screenshots/ui-fva.png" alt="QPlan RICS-aligned financial viability output with GDV, build costs, residual land value and viable verdict" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block" }} />
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={150}>
+              <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: 13, color: "var(--accent-cyan)", letterSpacing: "0.05em", marginBottom: 16 }}>08</div>
+              <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, fontSize: 28, color: "var(--text-primary)", marginBottom: 16, lineHeight: 1.2 }}>
+                Full Viability Assessment
+              </h3>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.75 }}>
+                RICS-aligned residual method per RICS <em>Valuation of Development Property</em> and <em>Financial Viability in Planning</em>. GDV from Land Registry comparables, BCIS build costs, residual land value calculation, and a clear viable/marginal/unviable verdict — plus recommended surveys with indicative costs.
+              </p>
             </ScrollReveal>
           </div>
         </div>
@@ -360,7 +400,7 @@ export default function Home() {
             {
               step: "02",
               title: "Constraint Check",
-              desc: "The pipeline queries 29 government datasets — flood zones, green belt, conservation areas, listed buildings, and more.",
+              desc: "The pipeline queries 30+ government datasets — flood zones, green belt, conservation areas, listed buildings, and more.",
               icon: (
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
@@ -453,7 +493,7 @@ export default function Home() {
         </ScrollReveal>
         <div className="grid-3col" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
           {[
-            { tag: "Screening", title: "19 Automated Constraint Checks", desc: "Green Belt, flood zones, heritage, SSSI, TPOs, archaeological sites, contaminated land, minerals safeguarding, and more — queried simultaneously from government datasets." },
+            { tag: "Screening", title: "30+ Automated Constraint Checks", desc: "Green Belt, flood zones, heritage, SSSI, TPOs, archaeological sites, contaminated land, minerals safeguarding, heritage at risk, irreplaceable habitat, and more — queried simultaneously from government datasets." },
             { tag: "Intelligence", title: "NPPF & Local Policy Analysis", desc: "Semantic search across 180+ NPPF paragraphs and per-LPA local plan policies using RAG retrieval. Every constraint is interpreted against current policy." },
             { tag: "Appraisal", title: "Multi-Option Feasibility Engine", desc: "Full developer appraisals with GDV calculation, BCIS build costs, CIL liability, SDLT, bridging finance, and profit-on-cost analysis across 3 development options." },
             { tag: "Scoring", title: "15-Dimension Excellence Scoring", desc: "Every assessment graded across legal framework, NPPF coverage, design quality, heritage, biodiversity, climate, and more. Exemplary to Inadequate ratings." },
@@ -462,6 +502,9 @@ export default function Home() {
             { tag: "Finance", title: "Sensitivity & Viability Analysis", desc: "Residual land valuation, ±10% scenario modelling, IRR calculations, affordable housing viability thresholds, and maximum acquisition pricing." },
             { tag: "Export", title: "Professional Report Exports", desc: "Branded Word (.docx), PDF, and Excel exports with compliance matrices, policy citations, risk appendices, and auto-generated table of contents." },
             { tag: "Workflow", title: "Conversational Briefing Interface", desc: "Natural language intake with a planning-specialist chat assistant. Live sidebar captures site data as you brief — no forms, no friction." },
+            { tag: "Policy", title: "Grey Belt Screening", desc: "NPPF December 2024 grey belt eligibility assessment. Identifies previously developed land within Green Belt boundaries and applies the updated policy framework for potential release." },
+            { tag: "Coverage", title: "50 LPA Configurations", desc: "Per-authority local plan policies, affordable housing thresholds, CIL rates, density guidelines, and parking standards. Coverage map shows which authorities are live." },
+            { tag: "Samples", title: "Real-World Sample Reports", desc: "Seven sample scenarios across the full risk spectrum — from green-light brownfield to red-flag floodplain, plus three feasibility appraisals. See exactly what you get before you buy." },
           ].map((item, i) => (
             <ScrollReveal key={item.title} delay={i * 60}>
               <div className="glass-card" style={{ padding: "28px 24px", height: "100%" }}>
@@ -494,10 +537,11 @@ export default function Home() {
         <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 500, color: "var(--text-muted)", textAlign: "center", marginBottom: 40, letterSpacing: "0.02em" }}>
           Built for planning professionals across the UK
         </p>
-        <div className="grid-3col" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+        <div className="grid-3col" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24 }}>
           {[
-            { value: "19", label: "Government Data Integrations" },
+            { value: "30+", label: "Government Data Integrations" },
             { value: "180+", label: "NPPF Paragraphs Indexed" },
+            { value: "50", label: "LPA Configurations" },
             { value: "15", label: "Excellence Scoring Dimensions" },
           ].map((stat) => (
             <div key={stat.label} className="glass-card" style={{ padding: "32px 24px", textAlign: "center" }}>
@@ -548,7 +592,7 @@ export default function Home() {
           </div>
           <div className="glass-card" style={{ padding: 32 }}>
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "var(--text-body)", lineHeight: 1.75, marginBottom: 16 }}>
-              Q Plan is a full-stack planning intelligence platform that takes property professionals from initial site screening through to feasibility appraisals and professional reports. By combining 19 government data integrations, semantic policy retrieval, specialist screening agents, and multi-option financial modelling, Q Plan delivers in minutes what currently takes days of manual research.
+              Q Plan is a full-stack planning intelligence platform that takes property professionals from initial site screening through to feasibility appraisals and professional reports. By combining 30+ government data integrations, semantic policy retrieval, specialist screening agents, and multi-option financial modelling, Q Plan delivers in minutes what currently takes days of manual research.
             </p>
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "var(--text-body)", lineHeight: 1.75 }}>
               Our goal is to raise the quality floor for every planning assessment in England — from householder extensions to large-scale major developments — by making professional-grade constraint analysis, viability modelling, and policy interpretation accessible to practices of every size.
@@ -571,7 +615,7 @@ export default function Home() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
               {[
                 { n: "1", title: "Site Intake", desc: "Conversational briefing captures address, proposal type, and site details" },
-                { n: "2", title: "Constraint Screening", desc: "19 parallel checks across planning.data.gov.uk, EA, Historic England, and more" },
+                { n: "2", title: "Constraint Screening", desc: "30+ parallel checks across planning.data.gov.uk, EA, Historic England, Natural England, and Coal Authority" },
                 { n: "3", title: "Policy Retrieval", desc: "RAG search across 180+ NPPF paragraphs and local plan policies via ChromaDB" },
                 { n: "4", title: "Specialist Agents", desc: "Heritage, BNG, and risk agents run in parallel with deterministic + LLM screening" },
                 { n: "5", title: "Feasibility Appraisal", desc: "Multi-option financial modelling with GDV, build costs, CIL, and sensitivity analysis" },
@@ -760,8 +804,13 @@ export default function Home() {
           {[
             {
               title: "Planning Statement Generation",
-              description: "Automated 7–11 section planning statements tailored to application type — from householder to major. Professional-grade documents with policy citations.",
-              tag: "Coming Soon",
+              description: "Automated 7–11 section planning statements tailored to application type — from householder to major. Professional-grade documents with NPPF and local policy citations.",
+              tag: "Now Live",
+            },
+            {
+              title: "Bulk Portfolio Screening",
+              description: "Upload CSV, Excel, or JSON to batch-assess up to 500 sites at once. Rank by development potential and constraint severity with progress tracking.",
+              tag: "Now Live",
             },
             {
               title: "Appeal Statement Generator",
@@ -771,12 +820,7 @@ export default function Home() {
             {
               title: "Constraint Change Alerts",
               description: "Get notified when policy changes, new designations, or emerging constraints affect your saved sites.",
-              tag: "Monitoring",
-            },
-            {
-              title: "Portfolio Batch Screening",
-              description: "Batch-assess multiple sites at once and rank by development potential and constraint severity.",
-              tag: "Workflow",
+              tag: "Coming Soon",
             },
             {
               title: "Wales, Scotland & NI Coverage",
@@ -786,7 +830,7 @@ export default function Home() {
             {
               title: "Pre-Application Engagement Tracker",
               description: "Log LPA advice, consultation responses, and track how pre-app recommendations have been addressed in your submission.",
-              tag: "Workflow",
+              tag: "Coming Soon",
             },
           ].map((feature, i) => (
             <ScrollReveal key={feature.title} delay={i * 80}>
@@ -809,8 +853,8 @@ export default function Home() {
                     fontWeight: 600,
                     textTransform: "uppercase",
                     letterSpacing: "0.06em",
-                    color: feature.tag === "Coming Soon" ? "var(--accent)" : "var(--accent-cyan)",
-                    background: feature.tag === "Coming Soon" ? "rgba(184,107,62,0.1)" : "var(--accent-cyan-glow)",
+                    color: feature.tag === "Now Live" ? "#16a34a" : feature.tag === "Coming Soon" ? "var(--accent)" : "var(--accent-cyan)",
+                    background: feature.tag === "Now Live" ? "rgba(22,163,74,0.1)" : feature.tag === "Coming Soon" ? "rgba(184,107,62,0.1)" : "var(--accent-cyan-glow)",
                     padding: "3px 10px",
                     borderRadius: 20,
                     marginBottom: 14,
@@ -881,7 +925,7 @@ export default function Home() {
         <div style={{ borderTop: "1px solid rgba(148,163,184,0.1)" }}>
           <FaqItem
             question="What does QPlan actually do?"
-            answer="QPlan is a complete planning intelligence platform. It screens sites against 19 government data sources, analyses constraints against NPPF and local plan policy, runs specialist heritage and biodiversity screening, generates multi-option feasibility appraisals with full financial modelling, and exports professional branded reports — all from a single postcode."
+            answer="QPlan is a complete planning intelligence platform. It screens sites against 30+ government data sources, analyses constraints against NPPF and local plan policy, runs specialist heritage and biodiversity screening, generates multi-option feasibility appraisals with full financial modelling, and exports professional branded reports — all from a single postcode."
           />
           <FaqItem
             question="How accurate are the constraint checks?"
@@ -901,7 +945,7 @@ export default function Home() {
           />
           <FaqItem
             question="What data sources does QPlan integrate with?"
-            answer="19 integrations including planning.data.gov.uk, Environment Agency flood maps, Historic England listings, Natural England SSSI and ancient woodland data, Coal Authority mining risk, Land Registry price-paid data, EPC register, BCIS build cost indices, MHCLG land values, and live council planning portals via PlanIt API."
+            answer="30+ integrations including planning.data.gov.uk (32 datasets), Environment Agency flood maps and contaminated land, Historic England listings and heritage at risk, Natural England SSSI and ancient woodland, Coal Authority mining risk, Land Registry price-paid data, EPC register, BCIS build cost indices, MHCLG land values, and live council planning portals via PlanIt API."
           />
           <FaqItem
             question="What export formats are available?"
@@ -909,7 +953,7 @@ export default function Home() {
           />
           <FaqItem
             question="Can I use QPlan for sites anywhere in England?"
-            answer="Yes. QPlan covers all local planning authorities in England with per-LPA configuration for local plan policies, affordable housing thresholds, density guidelines, and parking standards. Coverage for Wales, Scotland, and Northern Ireland is on our roadmap."
+            answer="Yes. QPlan currently has 50 local planning authority configurations across England, each with local plan policies, affordable housing thresholds, CIL rates, density guidelines, and parking standards. New LPAs are being added regularly. Coverage for Wales, Scotland, and Northern Ireland is on our roadmap."
           />
           <FaqItem
             question="Is QPlan a replacement for a planning consultant?"
