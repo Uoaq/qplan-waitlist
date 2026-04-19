@@ -25,27 +25,40 @@ const labelStyle: React.CSSProperties = {
   letterSpacing: "0.02em",
 };
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export function WaitlistForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
   const [industry, setIndustry] = useState("");
+  const [website, setWebsite] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!name || !email) return;
+    if (!name.trim() || !EMAIL_RE.test(email.trim())) {
+      setStatus("error");
+      return;
+    }
 
     setStatus("loading");
     try {
-      const subject = encodeURIComponent("QPlan Waitlist Request");
-      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nCompany: ${company}\nIndustry: ${industry}`);
-      window.open(`mailto:hello@qplan.co.uk?subject=${subject}&body=${body}`, "_blank");
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, company, industry, website }),
+      });
+      if (!res.ok) {
+        setStatus("error");
+        return;
+      }
       setStatus("success");
       setName("");
       setEmail("");
       setCompany("");
       setIndustry("");
+      setWebsite("");
     } catch {
       setStatus("error");
     }
@@ -83,6 +96,16 @@ export function WaitlistForm() {
 
   return (
     <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        value={website}
+        onChange={(e) => setWebsite(e.target.value)}
+        aria-hidden="true"
+        style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+      />
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
         <div>
           <label style={labelStyle}>Name *</label>
