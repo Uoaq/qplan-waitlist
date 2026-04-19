@@ -60,7 +60,7 @@ export async function POST(request: Request) {
       from,
       to: email,
       subject: "You're on the QPlan waitlist",
-      react: WaitlistConfirmation({ industry: industry || "your field" }),
+      react: WaitlistConfirmation({ name, industry: industry || "your field" }),
     }),
     resend.emails.send({
       from,
