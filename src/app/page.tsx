@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { QPlanLogo } from "@/components/qplan-logo";
+import { MockupTile } from "@/components/mockup-tile";
 import { UKMap } from "@/components/uk-map";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { WaitlistDialog } from "@/components/waitlist-dialog";
@@ -56,35 +56,38 @@ export default function Home() {
           </span>
         </a>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          {[
-            { label: "About", href: "#about" },
-            { label: "How it works", href: "#how-it-works" },
-            { label: "Features", href: "#features" },
-          ].map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              style={{
-                padding: "6px 16px",
-                fontFamily: "'Inter', sans-serif",
-                fontSize: "0.875rem",
-                fontWeight: 500,
-                color: "var(--text-secondary)",
-                textDecoration: "none",
-                borderRadius: 8,
-                transition: "color 0.3s, background 0.3s",
-              }}
-            >
-              {link.label}
-            </a>
-          ))}
+          <div className="nav-links" style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            {[
+              { label: "About", href: "#about" },
+              { label: "How it works", href: "#how-it-works" },
+              { label: "Features", href: "#features" },
+            ].map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                style={{
+                  padding: "6px 16px",
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: "0.875rem",
+                  fontWeight: 500,
+                  color: "var(--text-secondary)",
+                  textDecoration: "none",
+                  borderRadius: 8,
+                  transition: "color 0.3s, background 0.3s",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
           <a
             href="#" data-open-waitlist
             style={{
               display: "inline-flex",
               alignItems: "center",
-              padding: "4px 12px",
-              marginLeft: 8,
+              padding: "6px 14px",
+              marginLeft: 4,
               fontFamily: "'Inter', sans-serif",
               fontSize: "0.75rem",
               fontWeight: 600,
@@ -93,6 +96,7 @@ export default function Home() {
               border: "var(--btn-ghost-border)",
               borderRadius: 2,
               textDecoration: "none",
+              whiteSpace: "nowrap",
             }}
           >
             Join Waitlist
@@ -116,9 +120,10 @@ export default function Home() {
       >
         <UKMap />
 
-        <div style={{ position: "relative", zIndex: 3, display: "flex", alignItems: "center", gap: 20, marginBottom: 16 }}>
+        <div className="hero-brand" style={{ position: "relative", zIndex: 3, display: "flex", alignItems: "center", gap: 20, marginBottom: 16 }}>
           <QPlanLogo size={80} />
           <span
+            className="hero-brand-text"
             style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontWeight: 800,
@@ -207,7 +212,7 @@ export default function Home() {
             </ScrollReveal>
             <ScrollReveal delay={150}>
               <div className="glass-card" style={{ overflow: "hidden", borderRadius: "var(--radius-lg)" }}>
-                <Image src="/screenshots/ui-chat.png" alt="QPlan conversational briefing interface" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block" }} priority />
+                <MockupTile variant="chat" />
               </div>
             </ScrollReveal>
           </div>
@@ -218,7 +223,7 @@ export default function Home() {
           <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1.4fr 1fr", gap: 64, alignItems: "center" }}>
             <ScrollReveal>
               <div className="glass-card" style={{ overflow: "hidden", borderRadius: "var(--radius-lg)" }}>
-                <Image src="/screenshots/ui-map.png" alt="QPlan interactive constraint map with layer overlays" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block" }} />
+                <MockupTile variant="map" />
               </div>
             </ScrollReveal>
             <ScrollReveal delay={150}>
@@ -247,7 +252,7 @@ export default function Home() {
             </ScrollReveal>
             <ScrollReveal delay={150}>
               <div className="glass-card" style={{ overflow: "hidden", borderRadius: "var(--radius-lg)" }}>
-                <Image src="/screenshots/ui-results.png" alt="QPlan assessment results with AMBER verdict" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block" }} />
+                <MockupTile variant="risk" />
               </div>
             </ScrollReveal>
           </div>
@@ -258,7 +263,7 @@ export default function Home() {
           <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1.4fr 1fr", gap: 64, alignItems: "center" }}>
             <ScrollReveal>
               <div className="glass-card" style={{ overflow: "hidden", borderRadius: "var(--radius-lg)" }}>
-                <Image src="/screenshots/ui-report.png" alt="QPlan branded PDF report preview" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block" }} />
+                <MockupTile variant="report" />
               </div>
             </ScrollReveal>
             <ScrollReveal delay={150}>
@@ -288,7 +293,7 @@ export default function Home() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20, maxWidth: 1000, margin: "0 auto" }}>
               <ScrollReveal delay={0}>
                 <div className="glass-card" style={{ overflow: "hidden", borderRadius: "var(--radius-lg)" }}>
-                  <Image src="/screenshots/ui-bulk.png" alt="QPlan bulk CSV upload with batch processing" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block", borderBottom: "var(--glass-border)" }} />
+                  <MockupTile variant="bulk" />
                   <div style={{ padding: "14px 20px" }}>
                     <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>Bulk Upload</p>
                     <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "var(--text-secondary)" }}>Batch-assess up to 100 sites via CSV</p>
@@ -297,7 +302,7 @@ export default function Home() {
               </ScrollReveal>
               <ScrollReveal delay={150}>
                 <div className="glass-card" style={{ overflow: "hidden", borderRadius: "var(--radius-lg)" }}>
-                  <Image src="/screenshots/ui-policy-library.png" alt="QPlan policy library browser by local authority" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block", borderBottom: "var(--glass-border)" }} />
+                  <MockupTile variant="policy" />
                   <div style={{ padding: "14px 20px" }}>
                     <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>Policy Library</p>
                     <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "var(--text-secondary)" }}>Browse indexed policies by LPA</p>
@@ -322,7 +327,7 @@ export default function Home() {
             </ScrollReveal>
             <ScrollReveal delay={150}>
               <div className="glass-card" style={{ overflow: "hidden", borderRadius: "var(--radius-lg)", maxWidth: 1000, margin: "0 auto" }}>
-                <Image src="/screenshots/ui-dashboard.png" alt="QPlan planning intelligence dashboard" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block" }} />
+                <MockupTile variant="dashboard" />
               </div>
             </ScrollReveal>
           </div>
@@ -342,7 +347,7 @@ export default function Home() {
             </ScrollReveal>
             <ScrollReveal delay={150}>
               <div className="glass-card" style={{ overflow: "hidden", borderRadius: "var(--radius-lg)" }}>
-                <Image src="/screenshots/ui-feasibility.png" alt="QPlan feasibility appraisal with financial KPIs and viability verdict" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block" }} />
+                <MockupTile variant="feasibility" />
               </div>
             </ScrollReveal>
           </div>
@@ -353,7 +358,7 @@ export default function Home() {
           <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1.4fr 1fr", gap: 64, alignItems: "center" }}>
             <ScrollReveal>
               <div className="glass-card" style={{ overflow: "hidden", borderRadius: "var(--radius-lg)" }}>
-                <Image src="/screenshots/ui-fva.png" alt="QPlan RICS-aligned financial viability output with GDV, build costs, residual land value and viable verdict" width={1440} height={900} style={{ width: "100%", height: "auto", display: "block" }} />
+                <MockupTile variant="fva" />
               </div>
             </ScrollReveal>
             <ScrollReveal delay={150}>

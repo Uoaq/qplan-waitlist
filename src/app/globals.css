@@ -214,6 +214,43 @@ body {
 
 /* ─── Responsive ─── */
 @media (max-width: 768px) {
+  /* Walkthrough panels: stack image + text into a single column, let height
+     flex to content rather than full-viewport. The existing JSX uses inline
+     grid styles so we override with !important. */
+  .walkthrough-panel {
+    min-height: auto !important;
+    padding: 56px 20px !important;
+  }
+  .walkthrough-panel > div {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+  /* Keep headings from overflowing narrow viewports */
+  .walkthrough-panel h3 {
+    font-size: 24px !important;
+    word-break: break-word;
+  }
+
+  /* Hero brand mark: stack Q-logo above Plan wordmark on narrow screens */
+  .hero-brand {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .hero-brand-text {
+    font-size: 48px !important;
+  }
+
+  /* Nav: hide anchor links, keep only logo + CTA */
+  .nav-links {
+    display: none !important;
+  }
+
+  /* Waitlist form: stack inputs into a single column */
+  .waitlist-form-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Previously-unused class names kept for any other consumers */
   .walkthrough-step {
     flex-direction: column !important;
     gap: 24px !important;

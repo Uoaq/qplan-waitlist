@@ -106,7 +106,7 @@ export function WaitlistForm() {
         aria-hidden="true"
         style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
       />
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+      <div className="waitlist-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
         <div>
           <label style={labelStyle}>Name *</label>
           <input
@@ -130,7 +130,7 @@ export function WaitlistForm() {
           />
         </div>
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+      <div className="waitlist-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
         <div>
           <label style={labelStyle}>Company</label>
           <input
