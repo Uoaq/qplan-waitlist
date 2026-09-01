@@ -287,7 +287,7 @@ export default function Home() {
                 Bulk screening &amp; policy library
               </h3>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.7, maxWidth: 560, margin: "0 auto 48px" }}>
-                Upload CSV, Excel, JSON, or plain text files to batch-assess up to 500 sites at once with progress tracking. Browse indexed planning policies across 50 local authority configurations with semantic search.
+                Upload CSV, Excel, JSON, or plain text files to batch-assess sites in bulk with progress tracking, up to 100 on Pro and 500 on Enterprise. Browse indexed planning policies across 50 local authority configurations with semantic search.
               </p>
             </ScrollReveal>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20, maxWidth: 1000, margin: "0 auto" }}>
@@ -296,7 +296,7 @@ export default function Home() {
                   <MockupTile variant="bulk" />
                   <div style={{ padding: "14px 20px" }}>
                     <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>Bulk Upload</p>
-                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "var(--text-secondary)" }}>Batch-assess up to 100 sites via CSV</p>
+                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "var(--text-secondary)" }}>Up to 100 sites on Pro, 500 on Enterprise</p>
                   </div>
                 </div>
               </ScrollReveal>
@@ -499,11 +499,12 @@ export default function Home() {
         <div className="grid-3col" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
           {[
             { tag: "Screening", title: "30+ Automated Constraint Checks", desc: "Green Belt, flood zones, heritage, SSSI, TPOs, archaeological sites, contaminated land, minerals safeguarding, heritage at risk, irreplaceable habitat, and more — queried simultaneously from government datasets." },
-            { tag: "Intelligence", title: "NPPF & Local Policy Analysis", desc: "Semantic search across 180+ NPPF paragraphs and per-LPA local plan policies using RAG retrieval. Every constraint is interpreted against current policy." },
-            { tag: "Appraisal", title: "Multi-Option Feasibility Engine", desc: "Full developer appraisals with GDV calculation, BCIS build costs, CIL liability, SDLT, bridging finance, and profit-on-cost analysis across 3 development options." },
+            { tag: "Intelligence", title: "NPPF & Local Policy Analysis", desc: "Semantic search across 243 NPPF paragraphs and per-LPA local plan policies using RAG retrieval. Every constraint is interpreted against current policy." },
+            { tag: "Appraisal", title: "Multi-Option Feasibility Engine", desc: "Full developer appraisals with GDV calculation, BCIS build costs, CIL liability, SDLT, bridging finance, and profit-on-cost analysis across up to 3 development options." },
             { tag: "Scoring", title: "15-Dimension Excellence Scoring", desc: "Every assessment graded across legal framework, NPPF coverage, design quality, heritage, biodiversity, climate, and more. Exemplary to Inadequate ratings." },
             { tag: "Risk", title: "Heritage, BNG & Appeal Scoring", desc: "Specialist screening agents for heritage impact, biodiversity net gain compliance, and 7-dimension risk scoring with appeal outcome predictions." },
             { tag: "Data", title: "Planning History & Comparables", desc: "Live planning history from council portals via PlanIt API, comparable decision analysis, approval rates, and Land Registry price-paid evidence." },
+            { tag: "Pipeline", title: "Site Portfolio & Signals", desc: "Track watched sites in one ranked queue, scored on local approval record, nearby planning movement and value evidence. Every rate carries its sample size, and a site with too little evidence behind it says so rather than scoring zero." },
             { tag: "Finance", title: "Sensitivity & Viability Analysis", desc: "Residual land valuation, ±10% scenario modelling, IRR calculations, affordable housing viability thresholds, and maximum acquisition pricing." },
             { tag: "Export", title: "Professional Report Exports", desc: "Branded Word (.docx), PDF, and Excel exports with compliance matrices, policy citations, risk appendices, and auto-generated table of contents." },
             { tag: "Workflow", title: "Conversational Briefing Interface", desc: "Natural language intake with a planning-specialist chat assistant. Live sidebar captures site data as you brief — no forms, no friction." },
@@ -545,7 +546,7 @@ export default function Home() {
         <div className="grid-3col" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24 }}>
           {[
             { value: "30+", label: "Government Data Integrations" },
-            { value: "180+", label: "NPPF Paragraphs Indexed" },
+            { value: "243", label: "NPPF Paragraphs Indexed" },
             { value: "50", label: "LPA Configurations" },
             { value: "15", label: "Excellence Scoring Dimensions" },
           ].map((stat) => (
@@ -621,7 +622,7 @@ export default function Home() {
               {[
                 { n: "1", title: "Site Intake", desc: "Conversational briefing captures address, proposal type, and site details" },
                 { n: "2", title: "Constraint Screening", desc: "30+ parallel checks across planning.data.gov.uk, EA, Historic England, Natural England, and Coal Authority" },
-                { n: "3", title: "Policy Retrieval", desc: "RAG search across 180+ NPPF paragraphs and local plan policies via ChromaDB" },
+                { n: "3", title: "Policy Retrieval", desc: "Search across 243 indexed NPPF paragraphs and per-LPA local plan policies" },
                 { n: "4", title: "Specialist Agents", desc: "Heritage, BNG, and risk agents run in parallel with deterministic + LLM screening" },
                 { n: "5", title: "Feasibility Appraisal", desc: "Multi-option financial modelling with GDV, build costs, CIL, and sensitivity analysis" },
                 { n: "6", title: "Professional Export", desc: "Branded Word, PDF, and Excel reports with policy citations and compliance matrices" },
@@ -814,7 +815,7 @@ export default function Home() {
             },
             {
               title: "Bulk Portfolio Screening",
-              description: "Upload CSV, Excel, or JSON to batch-assess up to 500 sites at once. Rank by development potential and constraint severity with progress tracking.",
+              description: "Upload CSV, Excel, or JSON to batch-assess in bulk, up to 100 sites on Pro and 500 on Enterprise. Rank by development potential and constraint severity with progress tracking.",
               tag: "Now Live",
             },
             {

@@ -71,13 +71,42 @@ export async function POST(request: Request) {
     }),
   ]);
 
-  results.forEach((r, i) => {
-    if (r.status === "rejected") {
-      console.error(`[waitlist] send #${i} rejected:`, r.reason);
-    } else if (r.value?.error) {
-      console.error(`[waitlist] send #${i} resend error:`, r.value.error);
-    }
-  });
+  // Which of the two sends failed decides what the visitor is told.
+  //
+  // Before this, the route returned ok:true whatever happened: allSettled
+  // swallows both rejections, the failures went to console.error where nobody
+  // reads them, and the dialog said "You're on the list". A waitlist that had
+  // stopped working would have looked exactly like a waitlist nobody had
+  // joined, which is the worst possible failure for a launch page.
+  //
+  // The confirmation to the visitor is a courtesy: if it fails the lead is
+  // still captured, so do not make them retry. The notification is the lead
+  // itself; if that fails nobody has their details and saying "you're on the
+  // list" would be false.
+  const failed = (r: PromiseSettledResult<{ error?: unknown } | undefined>) =>
+    r.status === "rejected" || Boolean(r.value?.error);
+
+  const [confirmation, notification] = results;
+
+  if (failed(confirmation)) {
+    console.error(
+      "[waitlist] confirmation to visitor failed:",
+      confirmation.status === "rejected" ? confirmation.reason : confirmation.value?.error,
+    );
+  }
+
+  if (failed(notification)) {
+    console.error(
+      "[waitlist] OWNER NOTIFICATION FAILED, lead not captured:",
+      name,
+      email,
+      notification.status === "rejected" ? notification.reason : notification.value?.error,
+    );
+    return NextResponse.json(
+      { error: "We could not record that. Please email edward@qplan.co.uk directly." },
+      { status: 502 },
+    );
+  }
 
   return NextResponse.json({ ok: true }, { status: 200 });
 }
