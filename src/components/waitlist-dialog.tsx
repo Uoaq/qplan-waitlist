@@ -1,20 +1,24 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { WaitlistForm } from "./waitlist-form";
-import { QPlanLogo } from "./qplan-logo";
 
+// Opened by any element with data-open-waitlist. The dialog is a notice
+// pinned over the night (thesis T3): a real dialog, focus kept inside it,
+// and focus returned to the trigger on close.
 export function WaitlistDialog() {
   const [open, setOpen] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const returnTo = useRef<HTMLElement | null>(null);
 
   const close = useCallback(() => setOpen(false), []);
 
-  // Listen for clicks on any element with data-open-waitlist
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       const trigger = (e.target as HTMLElement).closest("[data-open-waitlist]");
       if (trigger) {
         e.preventDefault();
+        returnTo.current = trigger as HTMLElement;
         setOpen(true);
       }
     }
@@ -22,22 +26,41 @@ export function WaitlistDialog() {
     return () => document.removeEventListener("click", handleClick);
   }, []);
 
-  // Close on Escape
+  // Escape closes; Tab stays inside the panel.
   useEffect(() => {
     if (!open) return;
     function handleKey(e: KeyboardEvent) {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (e.key !== "Tab" || !panelRef.current) return;
+      const focusable = panelRef.current.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), input:not([tabindex="-1"]), a[href], [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     }
     document.addEventListener("keydown", handleKey);
     return () => document.removeEventListener("keydown", handleKey);
   }, [open]);
 
-  // Prevent body scroll when open
+  // Lock the page behind, move focus in, and return it on close.
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
+      panelRef.current?.querySelector<HTMLElement>("input:not([tabindex='-1'])")?.focus();
     } else {
       document.body.style.overflow = "";
+      returnTo.current?.focus();
     }
     return () => {
       document.body.style.overflow = "";
@@ -56,102 +79,47 @@ export function WaitlistDialog() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "rgba(0, 0, 0, 0.6)",
-        backdropFilter: "blur(8px)",
-        WebkitBackdropFilter: "blur(8px)",
-        padding: 24,
+        background: "rgba(15, 25, 35, 0.86)",
+        padding: "var(--s-4)",
+        overflowY: "auto",
       }}
     >
       <div
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="waitlist-dialog-title"
         onClick={(e) => e.stopPropagation()}
-        style={{
-          position: "relative",
-          width: "100%",
-          maxWidth: 480,
-          background: "var(--bg-surface)",
-          border: "var(--glass-border)",
-          borderRadius: "var(--radius-lg)",
-          boxShadow: "var(--glass-shadow)",
-          padding: "40px 36px 32px",
-          animation: "dialogIn 0.2s ease-out",
-        }}
+        className="notice"
+        style={{ position: "relative", width: "100%", maxWidth: 560 }}
       >
-        {/* Close button */}
         <button
+          type="button"
           onClick={close}
-          aria-label="Close"
           style={{
             position: "absolute",
-            top: 16,
-            right: 16,
+            top: "var(--s-3)",
+            right: "var(--s-3)",
+            minWidth: 44,
+            minHeight: 44,
             background: "none",
-            border: "none",
-            color: "var(--text-muted)",
+            border: 0,
+            font: "inherit",
+            fontSize: "var(--step--1)",
+            color: "var(--ink)",
+            textDecoration: "underline",
+            textUnderlineOffset: 3,
             cursor: "pointer",
-            padding: 4,
-            lineHeight: 1,
-            fontSize: 18,
           }}
         >
-          &#10005;
+          Close
         </button>
-
-        {/* Branding */}
-        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 20 }}>
-          <QPlanLogo size={22} />
-          <span
-            style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontWeight: 700,
-              fontSize: "0.95rem",
-              letterSpacing: "-0.02em",
-              color: "var(--text-primary)",
-            }}
-          >
-            Plan<span style={{ color: "var(--accent-cyan)" }}>.</span>
-          </span>
-        </div>
-
-        <h2
-          style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
-            fontWeight: 700,
-            fontSize: 22,
-            color: "var(--text-primary)",
-            marginBottom: 6,
-            lineHeight: 1.2,
-          }}
-        >
-          Get early access
-        </h2>
-        <p
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: 13,
-            color: "var(--text-secondary)",
-            lineHeight: 1.5,
-            marginBottom: 28,
-          }}
-        >
-          Join the waitlist for data-driven planning intelligence.
-          <br />
-          Planning consultants get priority.
+        <p className="notice__label">Notice · QPlan · England</p>
+        <h2 id="waitlist-dialog-title">Join the waitlist</h2>
+        <p style={{ marginBottom: "var(--s-5)" }}>
+          QPlan is private while it is tested. Planning consultants get priority.
         </p>
-
         <WaitlistForm />
-
-        <p
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: 11,
-            color: "var(--text-dim)",
-            marginTop: 20,
-            textAlign: "center",
-            lineHeight: 1.4,
-          }}
-        >
-          Aligned with the RICS AI Standard for professional use in property and planning.
-        </p>
       </div>
     </div>
   );

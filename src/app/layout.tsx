@@ -1,20 +1,30 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Tinos, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Tinos sets every notice (thesis T4). Plus Jakarta Sans lives only inside
+// the logo lock-up; 400 and 600 stay loaded for the /banner graphic.
+const tinos = Tinos({
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
   subsets: ["latin"],
+  variable: "--font-tinos",
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  weight: ["400", "600", "800"],
+  subsets: ["latin"],
+  variable: "--font-jakarta",
 });
 
 export const metadata: Metadata = {
-  title: "Q Plan — Planning Intelligence Platform",
+  title: "QPlan, planning evidence for sites in England",
   description:
-    "Screen any UK planning site for constraints, risk, and viability — in seconds. 30+ government data integrations. Feasibility appraisals, planning statements, and professional PDF reports. Built for planning consultants, developers, and land agents.",
+    "Site screening, feasibility appraisals, precedent evidence and a planning assistant that answers from pinned statute, for sites in England. Where the evidence is thin, QPlan says so.",
   openGraph: {
-    title: "Q Plan — Planning Intelligence Platform",
+    title: "QPlan, planning evidence for sites in England",
     description:
-      "Site screening, feasibility appraisals, and professional reports — 30+ government data integrations, from postcode to PDF in minutes.",
+      "Site screening, feasibility appraisals, precedent evidence and a planning assistant that answers from pinned statute, for sites in England.",
     type: "website",
   },
 };
@@ -25,15 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} h-full antialiased`}>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="en-GB" className={`${tinos.variable} ${jakarta.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

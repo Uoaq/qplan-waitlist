@@ -1,46 +1,39 @@
 "use client";
 
-import { useState } from "react";
-
-const inputStyle: React.CSSProperties = {
-  width: "100%",
-  padding: "11px 14px",
-  fontFamily: "'Inter', sans-serif",
-  fontSize: 13,
-  background: "rgba(255,255,255,0.04)",
-  border: "1px solid rgba(148,163,184,0.12)",
-  borderRadius: "var(--radius-sm)",
-  color: "var(--text-primary)",
-  outline: "none",
-  transition: "border-color 0.2s",
-};
-
-const labelStyle: React.CSSProperties = {
-  fontFamily: "'Inter', sans-serif",
-  fontSize: 11,
-  fontWeight: 500,
-  color: "var(--text-secondary)",
-  marginBottom: 4,
-  display: "block",
-  letterSpacing: "0.02em",
-};
+import { useId, useState } from "react";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+type Status = "idle" | "loading" | "success" | "error";
+
+// The waitlist form is the notice (thesis signature): lettered blanks, an
+// Insert: key beneath, and on success the notice is signed and dated.
 export function WaitlistForm() {
+  const uid = useId();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
   const [industry, setIndustry] = useState("");
   const [website, setWebsite] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<Status>("idle");
+  const [fieldError, setFieldError] = useState<"name" | "email" | null>(null);
+  const [serverError, setServerError] = useState<string | null>(null);
+  const [given, setGiven] = useState<{ name: string; email: string; date: string } | null>(null);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!name.trim() || !EMAIL_RE.test(email.trim())) {
+    setServerError(null);
+    if (!name.trim()) {
+      setFieldError("name");
       setStatus("error");
       return;
     }
+    if (!EMAIL_RE.test(email.trim())) {
+      setFieldError("email");
+      setStatus("error");
+      return;
+    }
+    setFieldError(null);
 
     setStatus("loading");
     try {
@@ -50,9 +43,16 @@ export function WaitlistForm() {
         body: JSON.stringify({ name, email, company, industry, website }),
       });
       if (!res.ok) {
+        const body = await res.json().catch(() => null);
+        setServerError(typeof body?.error === "string" ? body.error : null);
         setStatus("error");
         return;
       }
+      setGiven({
+        name: name.trim(),
+        email: email.trim(),
+        date: new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }),
+      });
       setStatus("success");
       setName("");
       setEmail("");
@@ -64,38 +64,30 @@ export function WaitlistForm() {
     }
   }
 
-  if (status === "success") {
+  if (status === "success" && given) {
     return (
-      <div
-        style={{
-          padding: "28px 24px",
-          textAlign: "center",
-          background: "rgba(255,255,255,0.02)",
-          borderRadius: "var(--radius-md)",
-          border: "1px solid rgba(148,163,184,0.08)",
-        }}
-      >
-        <div style={{ fontSize: 20, marginBottom: 10, color: "var(--accent-cyan)" }}>&#10003;</div>
-        <p
-          style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
-            fontWeight: 600,
-            fontSize: 16,
-            color: "var(--text-primary)",
-            marginBottom: 4,
-          }}
-        >
-          You&apos;re on the list
-        </p>
-        <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.5 }}>
-          We&apos;ll be in touch when your access is ready.
-        </p>
+      <div role="status">
+        <p style={{ fontSize: "var(--step-1)", fontWeight: 700, margin: "0 0 var(--s-2)" }}>Notice given.</p>
+        <p>We will write to {given.email} when your access is ready.</p>
+        <div className="sig">
+          <div className="sig__row">
+            <span>Signed</span>
+            <span className="sig__fill">{given.name}</span>
+          </div>
+          <div className="sig__row">
+            <span>Date</span>
+            <span className="sig__fill">{given.date}</span>
+          </div>
+        </div>
       </div>
     );
   }
 
+  const nameInvalid = status === "error" && fieldError === "name";
+  const emailInvalid = status === "error" && fieldError === "email";
+
   return (
-    <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+    <form onSubmit={handleSubmit} noValidate>
       <input
         type="text"
         name="website"
@@ -106,73 +98,82 @@ export function WaitlistForm() {
         aria-hidden="true"
         style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
       />
-      <div className="waitlist-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-        <div>
-          <label style={labelStyle}>Name *</label>
-          <input
-            type="text"
-            placeholder="Jane Smith"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            style={inputStyle}
-          />
-        </div>
-        <div>
-          <label style={labelStyle}>Work email *</label>
-          <input
-            type="email"
-            placeholder="jane@practice.co.uk"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            style={inputStyle}
-          />
-        </div>
+
+      <div className="keyed" data-invalid={nameInvalid}>
+        <label htmlFor={`${uid}-name`}>(a) Name</label>
+        <input
+          id={`${uid}-name`}
+          type="text"
+          autoComplete="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+          aria-invalid={nameInvalid}
+          aria-describedby={nameInvalid ? `${uid}-name-err` : undefined}
+        />
       </div>
-      <div className="waitlist-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-        <div>
-          <label style={labelStyle}>Company</label>
-          <input
-            type="text"
-            placeholder="Your firm"
-            value={company}
-            onChange={(e) => setCompany(e.target.value)}
-            style={inputStyle}
-          />
-        </div>
-        <div>
-          <label style={labelStyle}>Industry</label>
-          <input
-            type="text"
-            placeholder="e.g. Planning consultancy"
-            value={industry}
-            onChange={(e) => setIndustry(e.target.value)}
-            style={inputStyle}
-          />
-        </div>
+      {nameInvalid && (
+        <p id={`${uid}-name-err`} className="keyed__error" role="alert">(a) needs your name.</p>
+      )}
+
+      <div className="keyed" data-invalid={emailInvalid}>
+        <label htmlFor={`${uid}-email`}>(b) Work email</label>
+        <input
+          id={`${uid}-email`}
+          type="email"
+          autoComplete="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          aria-invalid={emailInvalid}
+          aria-describedby={emailInvalid ? `${uid}-email-err` : undefined}
+        />
       </div>
+      {emailInvalid && (
+        <p id={`${uid}-email-err`} className="keyed__error" role="alert">(b) needs a work email we can write to.</p>
+      )}
+
+      <div className="keyed">
+        <label htmlFor={`${uid}-company`}>(c) Firm</label>
+        <input
+          id={`${uid}-company`}
+          type="text"
+          autoComplete="organization"
+          value={company}
+          onChange={(e) => setCompany(e.target.value)}
+        />
+      </div>
+
+      <div className="keyed">
+        <label htmlFor={`${uid}-industry`}>(d) What you do</label>
+        <input
+          id={`${uid}-industry`}
+          type="text"
+          value={industry}
+          onChange={(e) => setIndustry(e.target.value)}
+        />
+      </div>
+
       <button
         type="submit"
+        className="act"
         disabled={status === "loading"}
-        className="btn"
-        style={{
-          width: "100%",
-          padding: "10px 24px",
-          fontSize: 13,
-          fontWeight: 600,
-          marginTop: 4,
-          opacity: status === "loading" ? 0.7 : 1,
-          cursor: status === "loading" ? "not-allowed" : "pointer",
-        }}
+        aria-busy={status === "loading"}
+        style={{ marginTop: "var(--s-4)" }}
       >
-        {status === "loading" ? "Joining..." : "Request early access"}
+        {status === "loading" ? "Giving notice..." : "Join the waitlist"}
       </button>
-      {status === "error" && (
-        <p style={{ fontSize: 12, color: "#ef4444", textAlign: "center" }}>
-          Something went wrong. Please try again.
+
+      {status === "error" && !fieldError && (
+        <p role="alert" className="keyed__error" style={{ marginTop: "var(--s-3)" }}>
+          {serverError ?? "The notice did not reach us. Try again, or email hello@qplan.co.uk."}
         </p>
       )}
+
+      <div className="insert">
+        <p>Insert: (a) your name (b) the email we should write to (c) your firm, if any (d) what you do, if you like.</p>
+        <p>Privacy notice to follow; email hello@qplan.co.uk.</p>
+      </div>
     </form>
   );
 }

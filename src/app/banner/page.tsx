@@ -11,7 +11,7 @@ export default function BannerPage() {
         padding: "0 80px",
         position: "relative",
         overflow: "hidden",
-        fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
+        fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', system-ui, sans-serif",
         boxSizing: "border-box",
       }}
     >

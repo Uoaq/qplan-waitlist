@@ -1,275 +1,389 @@
 @import "tailwindcss";
 
+/* QPlan: a notice board at dusk. Tokens cite the design thesis (T1 to T8,
+   _bespoke/2026-09-23/phase1_thesis.md, gitignored run notes). */
 :root {
-  /* ─── Backgrounds ─── */
-  --bg-main: #0F1923;
-  --bg-surface: #162231;
-  --surface-raised: rgba(255,255,255,0.03);
-  --surface-divider: rgba(148,163,184,0.08);
+  /* Night: the ground. It carries the brand only (T3). */
+  --night: #0F1923;
+  --night-band: #162231;
+  --night-line: #243444;
+  --night-text: #EDF1F4;   /* 15.6:1 on night */
+  --night-text-2: #A9B6C2; /* 8.6:1 on night, 7.8:1 on band */
+  --night-text-3: #8391A0; /* 5.5:1 on night, 5.0:1 on band */
 
-  /* ─── Text ─── */
-  --text-primary: #F1F5F9;
-  --text-secondary: #94A3B8;
-  --text-muted: #64748B;
-  --text-body: #CBD5E1;
-  --text-dim: #475569;
+  /* Notice: the figure. All reading happens on paper (T3, T8). */
+  --paper: #FBFBF7;
+  --ink: #111416;          /* 17.8:1 on paper */
+  --ink-2: #3F4549;        /* 9.4:1 on paper */
+  --ink-3: #5A6166;        /* 6.1:1 on paper */
+  --notice-border: 6px;
+  --rule: 1px solid var(--ink);
+  --leader: 2px dotted var(--ink);
 
-  /* ─── Accents ─── */
-  --accent: #B86B3E;
-  --accent-cyan: #22D3EE;
-  --accent-cyan-glow: rgba(34,211,238,0.08);
-  --accent-gradient: linear-gradient(135deg, #B86B3E 0%, #A05A32 100%);
+  /* The mark's colour (T5). 1.74:1 on paper, so never text there. */
+  --cyan: #22D3EE;
+  --survey-line: rgba(34, 211, 238, 0.18);
 
-  /* ─── Glass ─── */
-  --glass-bg: rgba(255,255,255,0.03);
-  --glass-blur: blur(20px);
-  --glass-border: 1px solid rgba(255,255,255,0.06);
-  --glass-highlight: inset 0 1px 0 rgba(255,255,255,0.05);
-  --glass-shadow: 0 8px 32px rgba(0,0,0,0.3);
-  --glass-hover-shadow: 0 8px 32px rgba(34,211,238,0.15);
+  /* Type (T4): one Times-lineage family on a perfect fourth over 18px (T8). */
+  --font-notice: var(--font-tinos), "Times New Roman", Times, serif;
+  --font-mark: var(--font-jakarta), "Plus Jakarta Sans", sans-serif;
+  --step--1: 0.875rem;
+  --step-0: 1.125rem;
+  --step-1: 1.5rem;
+  --step-2: 2rem;
+  --step-3: 2.625rem;
+  --step-4: 3.5rem;
+  --step-5: 4.75rem;
+  --lh-display: 1.02;
+  --lh-head: 1.1;
+  --lh-body: 1.5;
+  --track-display: -0.01em;
+  --track-label: 0.06em;
 
-  /* ─── Buttons ─── */
-  --btn-primary-bg: var(--accent);
-  --btn-primary-text: #FFFFFF;
-  --btn-ghost-border: 1px solid rgba(148,163,184,0.12);
+  /* Space: 8px base. */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
 
-  /* ─── Radius ─── */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-
-  /* ─── Sidebar / Header ─── */
-  --sidebar-bg: rgba(15,25,35,0.85);
-  --header-bg: rgba(15,25,35,0.6);
+  /* Motion (T8): one moment, the logo load-up. */
+  --ease-draw: cubic-bezier(0.6, 0, 0.2, 1);
+  --dur-draw: 1100ms;
+  --dur-state: 120ms;
 }
 
 @theme inline {
-  --color-background: var(--bg-main);
-  --color-foreground: var(--text-primary);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--night);
+  --color-foreground: var(--night-text);
+  --font-sans: var(--font-notice);
 }
 
 * {
   box-sizing: border-box;
 }
 
+html { scroll-behavior: auto; }
+
 body {
-  background: var(--bg-main);
-  color: var(--text-primary);
-  font-family: 'Inter', var(--font-sans), system-ui, sans-serif;
+  background: var(--night);
+  color: var(--night-text);
+  font-family: var(--font-notice);
   margin: 0;
   -webkit-font-smoothing: antialiased;
 }
 
-/* ─── Glass Card ─── */
-.glass-card {
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: var(--glass-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--glass-highlight), var(--glass-shadow);
-  transition: box-shadow 0.3s cubic-bezier(0.23,1,0.32,1),
-              transform 0.3s cubic-bezier(0.23,1,0.32,1);
-}
-.glass-card:hover {
-  box-shadow: var(--glass-highlight), var(--glass-hover-shadow);
-  transform: translateY(-2px);
-}
+/* ═══ Primitives (Phase 4 pass 2). Each cites a thesis principle. ═══ */
 
-/* ─── Background Orbs ─── */
-.orbs {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
+/* The night: the ground carries the brand only (T3). */
+.night {
+  background: var(--night);
+  color: var(--night-text);
+  font-family: var(--font-notice);
 }
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.18;
-}
-.orb--1 {
-  width: 600px;
-  height: 600px;
-  background: #22D3EE;
-  top: -200px;
-  right: -200px;
-}
-.orb--2 {
-  width: 500px;
-  height: 500px;
-  background: #E8722A;
-  bottom: -200px;
-  left: -200px;
-}
+.night a { color: var(--night-text); }
 
-/* ─── Buttons ─── */
-.btn {
+/* The notice: every word a reader must read sits on paper (T3). */
+.notice {
+  background: var(--paper);
+  color: var(--ink);
+  border: var(--notice-border) solid var(--ink);
+  border-radius: 0;
+  padding: var(--s-6) var(--s-7) var(--s-7);
+  font-family: var(--font-notice);
+  font-size: var(--step-0);
+  line-height: var(--lh-body);
+}
+.notice__label {
+  font-size: var(--step--1);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin: 0 0 var(--s-3);
+}
+.notice h1 {
+  font-size: var(--step-5);
+  font-weight: 700;
+  line-height: var(--lh-display);
+  letter-spacing: var(--track-display);
+  margin: 0 0 var(--s-5);
+}
+.notice h2 {
+  font-size: var(--step-3);
+  font-weight: 700;
+  line-height: var(--lh-head);
+  letter-spacing: var(--track-display);
+  margin: 0 0 var(--s-5);
+}
+.notice p { margin: 0 0 var(--s-3); }
+.notice a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.notice ol { margin: 0; padding-left: 1.4em; list-style: decimal; }
+.notice ol li { margin-bottom: var(--s-2); padding-left: var(--s-1); }
+
+/* A claim and its reason, the way a decision notice pairs a condition with its reason (T2). */
+.claim { margin: 0 0 var(--s-4); }
+.claim b { font-weight: 700; }
+
+/* Keyed blanks: "(a) Name ......" (T4). The label is real; the leader is the input's edge. */
+/* Label and entry share one bottom edge, so both sit on the leader line (T4). */
+.keyed { display: flex; align-items: flex-end; gap: var(--s-3); margin: 0 0 var(--s-3); }
+.keyed label { flex: 0 0 auto; white-space: nowrap; line-height: 1.25; padding-bottom: 6px; }
+.keyed input {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 44px;
+  background: transparent;
+  border: 0;
+  border-bottom: var(--leader);
+  border-radius: 0;
+  font: inherit;
+  color: var(--ink);
+  line-height: 1.25;
+  padding: var(--s-4) var(--s-1) 6px;
+}
+.keyed input:focus { outline: none; }
+.keyed input:focus-visible {
+  border-bottom-style: solid;
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+}
+.keyed[data-invalid="true"] input { border-bottom-style: solid; border-bottom-width: 3px; }
+.keyed__error { margin: calc(-1 * var(--s-2)) 0 var(--s-3); font-weight: 700; }
+
+/* The Insert: key under a form, and the asterisk key under a struck list (T4, T6). */
+.insert {
+  border-top: var(--rule);
+  margin-top: var(--s-5);
+  padding-top: var(--s-2);
+  font-size: var(--step--1);
+  font-style: italic;
+  color: var(--ink-3);
+  line-height: 1.45;
+}
+.insert p { margin: 0 0 var(--s-1); }
+
+/* The one action (T5): ink, with the mark's cyan as its underline. Nothing moves (T8). */
+.act {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 12px 32px;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  border-radius: 2px !important;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.23,1,0.32,1);
+  min-height: 44px;
+  padding: var(--s-3) var(--s-5);
+  background: var(--ink);
+  color: var(--paper);
+  border: 0;
+  border-bottom: 4px solid var(--cyan);
+  border-radius: 0;
+  font-family: var(--font-notice);
+  font-size: var(--step-0);
+  font-weight: 700;
   text-decoration: none;
-  color: var(--btn-primary-text);
-  background: var(--btn-primary-bg);
+  cursor: pointer;
+  transition: border-bottom-width var(--dur-state) linear;
 }
-.btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 24px rgba(232,114,42,0.3);
+.notice a.act, .night a.act { color: var(--paper); text-decoration: none; }
+.act:hover { border-bottom-width: 7px; }
+.act:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.act[aria-busy="true"], .act:disabled { opacity: 0.55; cursor: progress; }
+.act--night {
+  background: var(--paper);
+  color: var(--ink);
 }
-.btn-outline {
-  background: transparent;
-  color: var(--text-secondary);
-  border: 1px solid rgba(148,163,184,0.2);
-  border-radius: 2px !important;
-  padding: 12px 32px;
-  font-size: 14px;
-}
-.btn-outline:hover {
-  border-color: rgba(148,163,184,0.35);
-  color: var(--text-primary);
-  transform: translateY(-1px);
-}
+.night a.act--night { color: var(--ink); }
+.act--night:focus-visible { outline-color: var(--cyan); }
 
-/* ─── UK Map Draw Animation ─── */
-.uk-outline {
-  fill: none;
-  stroke: #22D3EE;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 3000;
-  stroke-dashoffset: 3000;
-  animation: drawUK 4s cubic-bezier(0.4,0,0.2,1) forwards;
-  filter: drop-shadow(0 0 6px rgba(34,211,238,0.4));
+/* Links on the night: an underline appears, nothing moves. */
+.night-link {
+  color: var(--night-text-2);
+  text-decoration: none;
+  text-underline-offset: 4px;
+  transition: color var(--dur-state) linear;
 }
-@keyframes dialogIn {
-  from { opacity: 0; transform: scale(0.95) translateY(10px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
-@keyframes drawUK {
-  to { stroke-dashoffset: 0; }
-}
-.uk-city {
-  fill: #22D3EE;
+.night-link:hover { color: var(--night-text); text-decoration: underline; }
+/* Focus: cyan only on the night, ink on paper (T5; cyan is 1.74:1 on paper). */
+.site-nav :focus-visible, .site-foot :focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
+.notice :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+/* Delete where inappropriate (T6). */
+.struck { text-decoration: line-through; text-decoration-thickness: 2px; color: var(--ink-2); }
+.ast { font-size: var(--step--1); font-style: italic; color: var(--ink-3); }
+
+/* Signature block: "Signed ...... Date ......" (T4). */
+.sig { margin-top: var(--s-5); }
+.sig__row { display: flex; align-items: baseline; gap: var(--s-2); margin-bottom: var(--s-2); }
+.sig__row span:first-child { flex: 0 0 auto; }
+.sig__row .sig__fill { flex: 1 1 auto; border-bottom: var(--leader); padding: 0 var(--s-1); font-style: italic; }
+
+/* The UK survey line: static, brand only (T3). */
+.survey path { fill: none; stroke: var(--survey-line); stroke-width: 1.5; stroke-linejoin: round; }
+
+/* The logo lock-up (brand lock). The load-up is the one motion moment (T8). */
+.mark { display: inline-flex; align-items: center; gap: 0.28em; color: var(--night-text); text-decoration: none; }
+.mark__word { font-family: var(--font-mark); font-weight: 800; letter-spacing: -0.02em; line-height: 1; }
+.mark__dot { color: var(--cyan); }
+/* Drawn the way a hand draws the mark: the ring clockwise from the handle
+   joint to the arrow tip, a flick for the arrowhead, the handle pulled down,
+   then the location dot set down at its end, then the name. */
+.mark--load .qmark .q-ring,
+.mark--load .qmark .q-arrow,
+.mark--load .qmark .q-handle {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
   opacity: 0;
-  animation: cityPulse 2s ease-in-out infinite;
+  animation-fill-mode: both;
+  animation-name: qmark-draw;
 }
-.uk-city--london { animation-delay: 4s; }
-.uk-city--manchester { animation-delay: 4.3s; }
-.uk-city--birmingham { animation-delay: 4.6s; }
-.uk-city--edinburgh { animation-delay: 4.9s; }
-.uk-city--bristol { animation-delay: 5.2s; }
-.uk-city--leeds { animation-delay: 5.5s; }
-.uk-city--cardiff { animation-delay: 4.15s; }
-.uk-city--southampton { animation-delay: 4.45s; }
-.uk-city--norwich { animation-delay: 4.75s; }
-.uk-city--plymouth { animation-delay: 5.05s; }
-.uk-city--glasgow { animation-delay: 5.35s; }
-.uk-city--liverpool { animation-delay: 4.1s; }
-.uk-city--nottingham { animation-delay: 4.55s; }
-.uk-city--cambridge { animation-delay: 4.85s; }
-.uk-city--belfast { animation-delay: 5.15s; }
-.uk-city--aberdeen { animation-delay: 5.45s; }
-.uk-city--brighton { animation-delay: 4.25s; }
-.uk-city--exeter { animation-delay: 4.65s; }
-@keyframes cityPulse {
-  0%, 100% { opacity: 0.4; r: 2.5; }
-  50% { opacity: 0.9; r: 4; }
+.mark--load .qmark .q-ring { animation-duration: 760ms; animation-timing-function: cubic-bezier(0.45, 0, 0.2, 1); }
+.mark--load .qmark .q-arrow { animation-duration: 180ms; animation-delay: 780ms; animation-timing-function: ease-out; }
+.mark--load .qmark .q-handle { animation-duration: 260ms; animation-delay: 1000ms; animation-timing-function: cubic-bezier(0.5, 0, 0.3, 1); }
+.mark--load .qmark .q-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: qmark-dot 300ms cubic-bezier(0.3, 1.5, 0.5, 1) 1260ms both;
 }
-.uk-city-ring {
-  fill: none;
-  stroke: rgba(34,211,238,0.3);
-  stroke-width: 0.5;
-  opacity: 0;
-  animation: ringExpand 3s ease-out infinite;
+.mark--load .mark__word { animation: qmark-word 420ms ease-out 1480ms both; }
+@keyframes qmark-draw {
+  0% { stroke-dashoffset: 1; opacity: 0; }
+  1% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
 }
-.uk-city-ring--london { animation-delay: 4s; }
-.uk-city-ring--manchester { animation-delay: 4.3s; }
-.uk-city-ring--birmingham { animation-delay: 4.6s; }
-.uk-city-ring--edinburgh { animation-delay: 4.9s; }
-.uk-city-ring--bristol { animation-delay: 5.2s; }
-.uk-city-ring--leeds { animation-delay: 5.5s; }
-@keyframes ringExpand {
-  0% { opacity: 0.6; r: 3; }
-  100% { opacity: 0; r: 12; }
-}
-.uk-grid-line {
-  stroke: rgba(34,211,238,0.04);
-  stroke-width: 0.5;
-}
-
-/* ─── Responsive ─── */
-@media (max-width: 768px) {
-  /* Walkthrough panels: stack image + text into a single column, let height
-     flex to content rather than full-viewport. The existing JSX uses inline
-     grid styles so we override with !important. */
-  .walkthrough-panel {
-    min-height: auto !important;
-    padding: 56px 20px !important;
-  }
-  .walkthrough-panel > div {
-    grid-template-columns: 1fr !important;
-    gap: 28px !important;
-  }
-  /* Keep headings from overflowing narrow viewports */
-  .walkthrough-panel h3 {
-    font-size: 24px !important;
-    word-break: break-word;
-  }
-
-  /* Hero brand mark: stack Q-logo above Plan wordmark on narrow screens */
-  .hero-brand {
-    flex-direction: column !important;
-    gap: 8px !important;
-  }
-  .hero-brand-text {
-    font-size: 48px !important;
-  }
-
-  /* Nav: hide anchor links, keep only logo + CTA */
-  .nav-links {
-    display: none !important;
-  }
-
-  /* Waitlist form: stack inputs into a single column */
-  .waitlist-form-grid {
-    grid-template-columns: 1fr !important;
-  }
-
-  /* Previously-unused class names kept for any other consumers */
-  .walkthrough-step {
-    flex-direction: column !important;
-    gap: 24px !important;
-  }
-  .walkthrough-step > div:first-child {
-    flex: 1 1 auto !important;
-  }
-  .risk-spectrum-grid {
-    grid-template-columns: 1fr !important;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  .grid-3col {
-    grid-template-columns: 1fr !important;
+@keyframes qmark-dot { from { transform: scale(0); } to { transform: scale(1); } }
+@keyframes qmark-word { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .mark--load .qmark .q-ring, .mark--load .qmark .q-arrow, .mark--load .qmark .q-handle,
+  .mark--load .qmark .q-dot, .mark--load .mark__word {
+    animation: none;
+    stroke-dashoffset: 0;
+    transform: none;
+    opacity: 1;
   }
 }
 
-/* ─── Selection ─── */
-::selection {
-  background: rgba(34,211,238,0.25);
-  color: var(--text-primary);
+::selection { background: var(--ink); color: var(--paper); }
+.night ::selection { background: var(--cyan); color: var(--night); }
+
+@media (max-width: 640px) {
+  :root { --notice-border: 4px; }
+  .notice { padding: var(--s-5) var(--s-5) var(--s-6); }
+  .notice h1 { font-size: var(--step-4); }
+  .notice h2 { font-size: var(--step-2); }
+  .keyed { flex-wrap: wrap; }
+  .keyed input { flex-basis: 100%; }
+}
+
+/* ═══ Composition (Phase 4 pass 3) ═══ */
+
+/* Navigation sits on the night; the one action is paper (T3, T5). */
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-5);
+  padding: var(--s-4) var(--s-8);
+  border-bottom: 1px solid var(--night-line);
+}
+.site-nav__links { display: flex; align-items: center; gap: var(--s-5); font-size: var(--step-0); }
+.site-nav__links .night-link, .site-foot .night-link { display: inline-flex; align-items: center; min-height: 44px; }
+.site-nav .act { font-size: var(--step-0); }
+
+/* Hero: the notice pinned left, the brand on the night to its right. */
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 600px) minmax(0, 1fr);
+  gap: var(--s-8);
+  align-items: start;
+  padding: var(--s-8) var(--s-8) var(--s-9);
+}
+.hero__notice { order: 1; }
+/* The brand column: logo, line and sub centred as one stack over the
+   survey line, which is centred on the same axis. */
+.hero__mark {
+  order: 2;
+  position: relative;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.hero__survey {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(460px, 90%);
+  height: auto;
+  z-index: 0;
+}
+.hero__mark > :not(.hero__survey) { position: relative; z-index: 1; }
+/* Set in the Insert-key register, not as a tracked eyebrow (T4). */
+.hero__tag {
+  margin: var(--s-5) 0 var(--s-3);
+  font-size: var(--step-0);
+  font-style: italic;
+  color: var(--night-text-2);
+}
+.hero__sub {
+  margin: 0;
+  max-width: 30ch;
+  font-size: var(--step-1);
+  line-height: 1.4;
+  color: var(--night-text);
+}
+
+/* The board: pinned notices of different widths and drops on a 12-column grid. */
+.board {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--s-6) var(--s-5);
+  align-items: start;
+  padding: var(--s-8) var(--s-8) var(--s-9);
+  background: var(--night-band);
+  border-top: 1px solid var(--night-line);
+}
+.board__title {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: var(--step-0);
+  font-style: italic;
+  color: var(--night-text-2);
+}
+.pin { scroll-margin-top: var(--s-6); }
+.pin--live { grid-column: 1 / 8; }
+.pin--inspect { grid-column: 8 / 13; margin-top: var(--s-8); }
+.pin--appraise { grid-column: 2 / 7; }
+.pin--applies { grid-column: 7 / 11; margin-top: var(--s-7); }
+.pin--about { grid-column: 1 / 6; }
+.pin--faq { grid-column: 6 / 13; margin-top: var(--s-6); }
+
+.site-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-3) var(--s-6);
+  padding: var(--s-6) var(--s-8);
+  border-top: 1px solid var(--night-line);
+  font-size: var(--step--1);
+  color: var(--night-text-3);
+}
+.site-foot p { margin: 0; }
+
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; padding: var(--s-6) var(--s-5) var(--s-8); }
+  .hero__mark { order: 0; align-self: stretch; padding-top: var(--s-5); }
+  .hero__survey { width: 240px; opacity: 0.8; }
+  .board { grid-template-columns: 1fr; padding: var(--s-6) var(--s-5) var(--s-8); }
+  .board > * { grid-column: 1 / -1 !important; margin-top: 0 !important; }
+  .site-nav { padding: var(--s-3) var(--s-5); }
+  .site-nav__links .night-link { display: none; }
+  .site-foot { padding: var(--s-5); }
+}
+@media (max-width: 640px) {
+  .hero { padding: var(--s-5) var(--s-4) var(--s-7); }
+  .board { padding: var(--s-5) var(--s-4) var(--s-7); }
 }

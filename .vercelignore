@@ -1,0 +1,3 @@
+# Never upload local run notes or local secrets with a CLI deploy.
+_bespoke
+.env*
