@@ -49,3 +49,4 @@ next-env.d.ts
 
 # bespoke-ui engine run artefacts
 /_bespoke/
+marketing/linkedin/out/

@@ -242,7 +242,7 @@ export default function Home() {
           <p className="notice__label">Notice 5</p>
           <h2 id="n5">Who gives this notice</h2>
           <p>
-            QPlan is built by Edward Pina-Butler, a planning consultant with a BSc in Urban Planning &amp;
+            QPlan is built by Edward Pina-Butler, an AI solutions engineer and planning consultant with a BSc in Urban Planning &amp;
             Development from a RICS-accredited programme. His undergraduate thesis investigated the
             implementation of artificial intelligence in planning and property, the research that laid the
             groundwork for QPlan.

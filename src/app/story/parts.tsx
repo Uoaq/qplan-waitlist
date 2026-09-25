@@ -39,7 +39,7 @@ export function StoryIntro({ cue = false }: { cue?: boolean }) {
         QPlan&rsquo;s, told by the person who has been building it since university.
       </p>
       <p>
-        <b>Applicant:</b>{" "}Edward Pina-Butler.
+        <b>Applicant:</b>{" "}Edward Pina-Butler, AI solutions engineer and planning consultant.
       </p>
       {cue ? <p className="journey-cue">Six entries, 2021 to 2026. Scroll, and they arrive in order.</p> : null}
     </section>
