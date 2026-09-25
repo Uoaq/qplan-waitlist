@@ -35,8 +35,8 @@ export function StoryIntro({ cue = false }: { cue?: boolean }) {
       <p className="notice__label">Planning history · QPlan</p>
       <h1 id="story-title">How QPlan got here.</h1>
       <p>
-        Every council keeps a planning history for a site: what was proposed, what was decided, and when. This is
-        QPlan&rsquo;s, told by the person who has been building it since university.
+        Councils keep a planning history for every site: what was applied for, and what was decided. I thought
+        QPlan should have one too. This is how it got here.
       </p>
       <p>
         <b>Applicant:</b>{" "}Edward Pina-Butler, AI solutions engineer and planning consultant.
@@ -118,19 +118,17 @@ export function Statement() {
       <p className="notice__label">Statement of the applicant</p>
       <h2 id="statement">Why I keep going</h2>
       <p>
-        I keep going because I can see how much further this can go. Most of what is sold as AI in planning stops at
-        the baseline: a chat box over a model, and a confident answer. That is not the ceiling.
+        There&rsquo;s so much more potential here than what&rsquo;s out there now. A lot of what gets sold as AI in
+        planning is a chat box on top of a model. That&rsquo;s the baseline, and most people stop there.
       </p>
       <p>
-        I love planning, and I love what AI can do. Not many people get to work where the two meet, knowing both
-        well enough to see what is possible, and I don&rsquo;t intend to waste it. QPlan is my attempt to show what
-        AI can do when someone who knows the subject, and cares about getting it right, is at the wheel.
+        I love planning and I love AI, and not many people get to properly do both. When you actually try to get it
+        right, instead of just getting it out, there&rsquo;s a lot more room to grow than people think.
       </p>
       <p>
-        It is still being built the way my dissertation said AI should be used: to augment the planner, with
-        evidence you can inspect, and never to invent a figure or a citation.
+        QPlan is me trying to show what AI can do when someone who knows planning, and actually cares about it, is
+        at the wheel. I hope you&rsquo;ll stick with me for the rest of the journey.
       </p>
-      <p>I hope you will come along for the rest of the journey.</p>
       <p>
         <b>I give notice that</b> I intend to keep going.
       </p>

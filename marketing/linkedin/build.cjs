@@ -176,9 +176,9 @@ ASSETS.push({
     <p class="nlabel" style="position:absolute;right:72px;top:80px">The planning history of QPlan</p>
     ${STAGE(`<div class="notice pin" style="padding:52px 60px 48px;transform:rotate(-0.6deg)">
       <p class="label" style="margin-bottom:14px">EPB/2023/02 · 2023 to 2024</p>
-      <h1 style="font-size:80px;line-height:1.02;margin-bottom:20px">Somebody has already done it.</h1>
+      <h1 style="font-size:80px;line-height:1.02;margin-bottom:20px">Somebody&rsquo;s already done it.</h1>
       <p style="font-size:27px;font-style:italic;color:var(--ink2);margin-bottom:28px"><span class="label" style="font-style:normal;font-size:18px;margin-right:10px">Proposal</span>An app to speed up the planning process</p>
-      <p style="font-size:31px;line-height:1.4;margin-bottom:36px">That is what I was told in my third year at Cardiff. It took the wind out of me for a while. Then a simpler question won: why can't I try?</p>
+      <p style="font-size:31px;line-height:1.4;margin-bottom:36px">That&rsquo;s what I was told in third year at Cardiff, when I said I wanted to build an app to speed up planning. Honestly, it demotivated me for a while. Then I thought, why can&rsquo;t I try?</p>
       <div style="border-top:2px solid var(--ink);padding-top:24px;display:flex;align-items:center;gap:22px">
         <span class="label" style="font-size:18px">Decision</span><span class="stamp" style="font-size:28px">Proceeded anyway</span>
       </div>

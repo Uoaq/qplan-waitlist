@@ -87,15 +87,15 @@ England only, and an evidence tool, not legal advice. Waitlist at qplan.co.uk.
 
 ## Post 4: the story (image 06)
 
-"Somebody has already done it."
+"Somebody's already done it."
 
-That is what I was told in my third year at Cardiff, when I said I wanted to build an app to speed up the planning process. It took the wind out of me for a while. Then a simpler question won: why can't I try?
+That's what I was told in third year at Cardiff, when I said I wanted to build an app to speed up the planning process. Honestly, it demotivated me for a while. Then I thought, fine, somebody's done it, but why can't I try?
 
-I wrote my dissertation on AI in urban planning instead, and interviewed people who knew where it could go wrong. Their answer became my rule: AI should augment the planner, not replace them, and its data has to be checked before anyone relies on it.
+I made it my dissertation instead: AI in planning, and what could go wrong. Everyone I interviewed said the same thing in different ways. AI should help the planner, not replace them, and you have to check the data before you trust it.
 
-The first QPlan was a chat window with nothing behind it. Two years later, it screens sites across England and never authors a number.
+The first QPlan was a chat window with no model behind it, because I didn't know how to use API keys. I've been chipping away at it ever since, and it now screens sites across England and never makes up a figure.
 
-I have written the whole thing up as a planning history, because what else would it be: qplan.co.uk/story
+I've written the whole thing up as a planning history, because what else would it be: qplan.co.uk/story
 
 #founder #planning #AI
 
