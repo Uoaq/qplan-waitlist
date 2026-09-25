@@ -81,7 +81,7 @@ export const HISTORY: Entry[] = [
     decision: "In private testing",
     reason: "join the waitlist for access.",
     body: [
-      "QPlan now is a completely different thing from that first chat window. It screens sites in England against government data, works out feasibility and viability, and answers planning questions from the actual statute, and it only cites what it has opened.",
+      "QPlan now is a completely different thing from that first chat window. It screens sites in England against government data, works out feasibility and viability, and answers planning questions from the actual statute, and every answer comes with its source.",
       "The numbers come from the data, not the AI. The AI writes the words and never makes up a figure, and if the evidence isn't there, it tells you. That's basically my dissertation, built.",
     ],
   },

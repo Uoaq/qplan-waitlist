@@ -156,7 +156,7 @@ export default function Home() {
           <h1 id="hero-title">Know your site before you commit.</h1>
           <p style={{ marginBottom: "var(--s-5)" }}>
             <b>I give notice that</b> QPlan reads any site in England against government data, tests what could be
-            built there, and cites nothing it has not opened.
+            built there, and shows you where every answer comes from.
           </p>
           <WaitlistForm />
         </section>
@@ -198,7 +198,7 @@ export default function Home() {
           <ol>
             <li>the statutory provisions and judgments behind every assistant reply;</li>
             <li>the sample size behind every rate. Where it is too small, the answer says so rather than scoring zero;</li>
-            <li>the council page each precedent came from. QPlan cites none it did not open;</li>
+            <li>the council page behind every precedent it quotes;</li>
             <li>the Framework the assistant answers from: the NPPF of 17 August 2026.</li>
           </ol>
           <p style={{ marginTop: "var(--s-4)" }}>

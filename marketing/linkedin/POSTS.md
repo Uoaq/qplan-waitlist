@@ -37,7 +37,7 @@ Join the waitlist at qplan.co.uk.
 
 I give notice that QPlan is taking names.
 
-QPlan reads any site in England against government data, tests what could be built there, and cites nothing it has not opened.
+QPlan reads any site in England against government data, tests what could be built there, and shows you where every answer comes from.
 
 Draw a site, or click a parcel for its registered title. See the constraints over it, its planning history and what the council is likely to object to. Test two or three schemes for feasibility, then run a full viability appraisal. Ask a planning question and get an answer from pinned statute, with every citation checked.
 
@@ -109,7 +109,7 @@ Find: Map Explorer, with 35 constraint layers, registered titles, planning histo
 Screen: what will the council object to?
 Appraise: does the scheme make money?
 Ask: answers you can check.
-Inspect: nothing it has not opened.
+Check: every answer, with its source.
 
 Swipe through, then join the waitlist at qplan.co.uk.
 
