@@ -105,6 +105,7 @@ export default function Home() {
           <a className="night-link" href="#inspect">You may inspect</a>
           <a className="night-link" href="#applies">Where it applies</a>
           <a className="night-link" href="#about">About</a>
+          <Link className="night-link" href="/story">Story</Link>
           <a className="act act--night" href="#waitlist" data-open-waitlist>
             Join the waitlist
           </a>
@@ -200,6 +201,10 @@ export default function Home() {
             Development from a RICS-accredited programme. His undergraduate thesis investigated the
             implementation of artificial intelligence in planning and property, the research that laid the
             groundwork for QPlan.
+          </p>
+          <p>
+            <Link href="/story">Read the planning history of QPlan</Link>, from a planning degree at Cardiff to the
+            product in testing today.
           </p>
           <div className="sig">
             <div className="sig__row">

@@ -361,6 +361,77 @@ body {
 .pin--about { grid-column: 1 / 6; }
 .pin--faq { grid-column: 6 / 13; margin-top: var(--s-6); }
 
+/* The story: one reading column of notices, the register as its spine (T4, T7). */
+.story {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-6);
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--s-7) var(--s-5) var(--s-9);
+}
+.story__tag {
+  margin: 0;
+  font-size: var(--step-0);
+  font-style: italic;
+  color: var(--night-text-2);
+}
+
+/* A council's planning history register: reference, proposal, decision. */
+.register {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: var(--rule);
+  font-size: var(--step-0);
+}
+.register th {
+  text-align: left;
+  font-weight: 400;
+  font-size: var(--step--1);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-2);
+  padding: var(--s-2) var(--s-3) var(--s-2) 0;
+  border-bottom: var(--rule);
+}
+.register td {
+  vertical-align: top;
+  padding: var(--s-3) var(--s-3) var(--s-3) 0;
+  border-bottom: 1px solid var(--ink-3);
+  line-height: 1.35;
+}
+.register__ref { white-space: nowrap; }
+.register__date { display: block; font-size: var(--step--1); font-style: italic; color: var(--ink-3); }
+
+/* Each entry closes on its decision, as a decision notice does (T2, T4). */
+.notice .entry__decision {
+  display: flex;
+  gap: var(--s-3);
+  align-items: baseline;
+  margin: var(--s-5) 0 0;
+  padding-top: var(--s-3);
+  border-top: var(--rule);
+}
+.entry__decision span:first-child {
+  flex: 0 0 auto;
+  font-size: var(--step--1);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+@media (max-width: 640px) {
+  .story { padding: var(--s-5) var(--s-4) var(--s-7); gap: var(--s-5); }
+  .register thead { display: none; }
+  .register, .register tbody, .register tr, .register td { display: block; width: 100%; }
+  .register tr { padding: var(--s-3) 0; border-bottom: 1px solid var(--ink-3); }
+  .register td { padding: 0; border: 0; }
+  .register td.register__ref { display: flex; gap: var(--s-3); align-items: baseline; }
+  .register__date { display: inline; }
+  .notice .entry__decision { flex-direction: column; gap: var(--s-1); }
+}
+
 .site-foot {
   display: flex;
   flex-wrap: wrap;
@@ -386,4 +457,118 @@ body {
 @media (max-width: 640px) {
   .hero { padding: var(--s-5) var(--s-4) var(--s-7); }
   .board { padding: var(--s-5) var(--s-4) var(--s-7); }
+}
+
+/* ═══ The story (2026-09-25). Ed asked for the story to arrive as you
+   scroll; this relaxes T8's single motion moment on /story only. Each motion
+   comes from the subject (a line surveyed, a notice pinned, a decision
+   stamped), never a blanket fade, and none of it runs under reduced motion. */
+
+.story--wide { max-width: 1000px; }
+.journey-cue { margin-top: var(--s-4) !important; font-style: italic; color: var(--ink-3); }
+
+/* The decision stamp: a council's decision stamp, square and inked. */
+.stamp {
+  display: inline-block;
+  padding: 0 var(--s-2);
+  border: 3px double var(--ink);
+  text-transform: uppercase;
+  letter-spacing: var(--track-label);
+  font-size: var(--step--1);
+  line-height: 1.7;
+  transform: rotate(-2deg);
+}
+
+/* Arrival states. Only [data-reveal="wait"] hides, and only the script sets
+   it, so a reader without script sees everything. */
+[data-reveal] { --arrive: 520ms; }
+.arrive[data-reveal="wait"] { opacity: 0; transform: translateY(24px); }
+.arrive[data-reveal="in"] { transition: opacity 400ms linear, transform var(--arrive) var(--ease-draw); }
+[data-reveal="wait"] .stamp { opacity: 0; transform: rotate(-2deg) scale(1.7); }
+[data-reveal="in"] .stamp {
+  transition: opacity 120ms linear 620ms, transform 240ms cubic-bezier(0.3, 1.5, 0.5, 1) 620ms;
+}
+
+/* The trail: pinned as you go */
+.trail {
+  position: relative;
+  list-style: none;
+  margin: var(--s-6) 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-8);
+}
+.trail::before, .trail::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 151px;
+  width: 2px;
+  background: var(--night-line);
+}
+.trail::after { background: var(--cyan); transform-origin: top; transform: scaleY(var(--p, 1)); }
+.trail__row { display: grid; grid-template-columns: 120px 64px minmax(0, 1fr); align-items: start; scroll-margin-top: var(--s-6); }
+.trail__year {
+  margin: var(--s-5) 0 0;
+  text-align: right;
+  font-size: var(--step-3);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--night-text);
+}
+.trail__node {
+  position: relative;
+  z-index: 1;
+  justify-self: center;
+  margin-top: calc(var(--s-5) + 12px);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--night);
+  border: 2px solid var(--night-text-3);
+}
+.notice .entry__proposal { margin: calc(-1 * var(--s-3)) 0 var(--s-4); font-style: italic; color: var(--ink-2); }
+.entry__proposal span {
+  font-style: normal;
+  font-size: var(--step--1);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  margin-right: var(--s-2);
+}
+.trail__notice h2 { font-size: var(--step-3); }
+.trail__notice { position: relative; transform: rotate(-0.4deg); }
+.trail__row:nth-child(even) .trail__notice { transform: rotate(0.5deg); }
+.trail__notice::before {
+  content: "";
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin-left: -8px;
+  border-radius: 50%;
+  background: var(--cyan);
+  border: 2px solid var(--ink);
+}
+.trail__row[data-reveal="in"] .trail__node { background: var(--cyan); border-color: var(--cyan); transition: background 200ms linear 200ms, border-color 200ms linear 200ms; }
+.trail__row[data-reveal="wait"] .trail__year { opacity: 0; transform: translateX(-16px); }
+.trail__row[data-reveal="wait"] .trail__notice { opacity: 0; transform: translateY(40px) rotate(-3deg); }
+.trail__row[data-reveal="wait"] .trail__notice::before { transform: scale(0); }
+.trail__row[data-reveal="in"] .trail__year { transition: opacity 300ms linear, transform 400ms var(--ease-draw); }
+.trail__row[data-reveal="in"] .trail__notice { transition: opacity 260ms linear, transform var(--arrive) var(--ease-draw); }
+.trail__row[data-reveal="in"] .trail__notice::before { transition: transform 260ms cubic-bezier(0.3, 1.5, 0.5, 1) 460ms; }
+
+@media (max-width: 720px) {
+  .trail::before, .trail::after { left: 7px; }
+  .trail__row { grid-template-columns: 16px minmax(0, 1fr); column-gap: var(--s-4); }
+  .trail__year { grid-column: 2; grid-row: 1; text-align: left; margin: 0 0 var(--s-3); font-size: var(--step-2); }
+  .trail__node { grid-column: 1; grid-row: 1; margin-top: 8px; }
+  .trail__notice { grid-column: 2; grid-row: 2; }
+  .trail__notice h2 { font-size: var(--step-2); }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] *, [data-reveal] { transition: none !important; }
+  .stamp { transform: rotate(-2deg) !important; opacity: 1 !important; }
 }
