@@ -82,7 +82,7 @@ ASSETS.push({
     <div class="notice pin" style="position:absolute;right:72px;top:62px;width:560px;padding:30px 36px 26px">
       <p class="label" style="font-size:16px;margin-bottom:10px">Notice · QPlan · England</p>
       <h1 style="font-size:46px;line-height:1.02;margin-bottom:14px">Know your site before you commit.</h1>
-      <p style="font-size:19px;line-height:1.4"><b>I give notice that</b> QPlan reads any site in England and shows you where every answer comes from. <i>qplan.co.uk</i></p>
+      <p style="font-size:19px;line-height:1.4"><b>I give notice that</b> QPlan reads any site in England and cites the truth. <i>qplan.co.uk</i></p>
     </div>`),
 });
 
@@ -111,7 +111,7 @@ ASSETS.push({
     ${STAGE(`<div class="notice pin" style="padding:52px 60px 48px">
       <p class="label" style="margin-bottom:18px">Notice · QPlan · England</p>
       <h1 style="font-size:96px;line-height:1;margin-bottom:30px">Know your site before you commit.</h1>
-      <p style="font-size:31px;line-height:1.4;margin-bottom:34px"><b>I give notice that</b> QPlan reads any site in England against government data, tests what could be built there, and shows you where every answer comes from.</p>
+      <p style="font-size:31px;line-height:1.4;margin-bottom:34px"><b>I give notice that</b> QPlan reads any site in England against government data, tests what could be built there, and cites the truth.</p>
       <div class="sig" style="font-size:26px;margin-bottom:12px"><span>Signed</span><span class="fill">Edward Pina-Butler</span></div>
       <div class="sig" style="font-size:26px"><span>Where it may be inspected</span><span class="fill">qplan.co.uk</span></div>
     </div>`)}

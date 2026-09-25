@@ -156,7 +156,7 @@ export default function Home() {
           <h1 id="hero-title">Know your site before you commit.</h1>
           <p style={{ marginBottom: "var(--s-5)" }}>
             <b>I give notice that</b> QPlan reads any site in England against government data, tests what could be
-            built there, and shows you where every answer comes from.
+            built there, and cites the truth.
           </p>
           <WaitlistForm />
         </section>
