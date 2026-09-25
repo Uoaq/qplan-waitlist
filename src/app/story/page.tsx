@@ -11,7 +11,7 @@ import { EntryBody, Register, Statement, StoryFoot, StoryIntro, StoryNav, anchor
 export const metadata: Metadata = {
   title: "The planning history of QPlan",
   description:
-    "How QPlan got here: from a planning degree at Cardiff, through a dissertation on AI in urban planning, to planning evidence for sites in England.",
+    "How QPlan got here: from a planning degree at Cardiff, through a dissertation on AI in urban planning, to QPlan today.",
 };
 
 export default function Story() {

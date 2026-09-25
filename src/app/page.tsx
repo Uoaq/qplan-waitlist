@@ -145,7 +145,7 @@ export default function Home() {
         <div className="hero__mark">
           <UKMap className="hero__survey" />
           <QPlanMark size={96} load />
-          <p className="hero__tag">Planning evidence for England</p>
+          <p className="hero__tag">Know any site in England</p>
           <p className="hero__sub">
             Constraints, appraisals, application requirements and planning answers for any site in England.
           </p>
@@ -225,7 +225,7 @@ export default function Home() {
             <span className="struck">Northern Ireland</span>*
           </p>
           <p>
-            Planning evidence / <span className="struck">legal advice</span>*
+            The facts / <span className="struck">legal advice</span>*
           </p>
           <p>
             A screening / <span className="struck">a prediction</span>*
@@ -276,7 +276,7 @@ export default function Home() {
 
       <footer className="site-foot">
         <QPlanMark size={24} />
-        <p>Planning evidence · England</p>
+        <p>Know any site in England</p>
         <p>
           <a className="night-link" href="mailto:hello@qplan.co.uk">hello@qplan.co.uk</a>
         </p>

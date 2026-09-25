@@ -67,6 +67,39 @@ const STAGE = (inner, top = 170, bottom = 130) =>
 
 const ASSETS = [];
 
+// 0. Profile pictures: the Q mark alone. The glyph is centred on its own
+// drawn bounds (not its 120 box) and kept inside the circle LinkedIn crops to.
+const QGLYPH = (stroke) => `<svg id="q" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%" fill="none">
+  <g id="glyph">
+    <path d="M 68 92 A 36 36 0 1 1 88 78" stroke="${stroke}" stroke-width="7" stroke-linecap="round"/>
+    <line x1="68" y1="92" x2="96" y2="112" stroke="${stroke}" stroke-width="7" stroke-linecap="round"/>
+    <polyline points="82,65 88,78 100,72" stroke="${stroke}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="96" cy="112" r="7" fill="#22D3EE"/>
+  </g></svg>`;
+const CENTRE_Q = (fill) => async (p) =>
+  p.evaluate((fill) => {
+    const g = document.getElementById("glyph").getBBox();
+    const pad = 3.5; // stroke half-width and cap
+    const w = g.width + pad * 2, h = g.height + pad * 2;
+    const side = Math.max(w, h) / fill;
+    const cx = g.x + g.width / 2, cy = g.y + g.height / 2;
+    document.getElementById("q").setAttribute("viewBox", `${cx - side / 2} ${cy - side / 2} ${side} ${side}`);
+  }, fill);
+ASSETS.push({
+  name: "00-profile-picture-night-400x400",
+  w: 400,
+  h: 400,
+  html: page(400, 400, QGLYPH("#EDF1F4")),
+  prep: CENTRE_Q(0.56),
+});
+ASSETS.push({
+  name: "00-profile-picture-paper-400x400",
+  w: 400,
+  h: 400,
+  html: page(400, 400, `<div style="position:absolute;inset:0;background:var(--paper)"></div>${QGLYPH("#111416")}`),
+  prep: CENTRE_Q(0.56),
+});
+
 // 1. Personal profile banner. The avatar covers the lower left, so the notice
 // sits right of centre.
 ASSETS.push({
@@ -74,10 +107,10 @@ ASSETS.push({
   w: 1584,
   h: 396,
   html: page(1584, 396, `
-    ${UK.replace('class="uk"', 'class="uk" style="left:840px;top:-110px;width:400px;height:600px"')}
-    <div style="position:absolute;left:470px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;gap:18px;width:430px">
+    ${UK.replace('class="uk"', 'class="uk" style="left:150px;top:-100px;width:400px;height:600px;stroke:rgba(34,211,238,.28)"')}
+    <div style="position:absolute;left:560px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;gap:18px;width:400px">
       ${MARK(64)}
-      <p style="font-size:24px;font-style:italic;color:var(--nt2)">Planning evidence for England</p>
+      <p style="font-size:24px;font-style:italic;color:var(--nt2)">Know any site in England</p>
     </div>
     <div class="notice pin" style="position:absolute;right:72px;top:62px;width:560px;padding:30px 36px 26px">
       <p class="label" style="font-size:16px;margin-bottom:10px">Notice · QPlan · England</p>
@@ -94,7 +127,7 @@ ASSETS.push({
   html: page(1128, 191, `
     ${UK.replace('class="uk"', 'class="uk" style="left:520px;top:-150px;width:330px;height:495px"')}
     <div style="position:absolute;left:56px;top:0;bottom:0;display:flex;align-items:center;gap:28px">${MARK(58)}
-      <p style="font-size:22px;font-style:italic;color:var(--nt2)">Planning evidence for England</p></div>
+      <p style="font-size:22px;font-style:italic;color:var(--nt2)">Know any site in England</p></div>
     <div class="notice" style="position:absolute;right:48px;top:36px;width:360px;padding:18px 24px;border-width:6px">
       <p style="font-size:30px;font-weight:700;line-height:1.05">Know your site before you commit.</p>
     </div>`),
@@ -129,7 +162,7 @@ ASSETS.push({
       <p class="label" style="margin-bottom:20px">Notice · What QPlan is</p>
       <h1 style="font-size:88px;line-height:1.02;margin-bottom:52px">Most AI in planning is a confident guess.</h1>
       <div style="font-size:50px;line-height:1.2;display:flex;flex-direction:column;gap:34px;margin-bottom:56px">
-        <p>Planning evidence / <span class="struck">AI slop</span>*</p>
+        <p>The facts / <span class="struck">AI slop</span>*</p>
         <p>Cited from statute / <span class="struck">made up</span>*</p>
         <p>Figures from the data / <span class="struck">from a model</span>*</p>
         <p>Unknown, and says so / <span class="struck">guessed</span>*</p>
@@ -137,7 +170,7 @@ ASSETS.push({
       </div>
       <p class="insert" style="font-size:28px">* delete where inappropriate</p>
     </div>`)}
-    <p class="url" style="position:absolute;left:72px;bottom:56px"><b>qplan.co.uk</b> · planning evidence for England</p>`),
+    <p class="url" style="position:absolute;left:72px;bottom:56px"><b>qplan.co.uk</b> · know any site in England</p>`),
 });
 
 // 5. Who it is for.
@@ -210,7 +243,7 @@ const SLIDES = [
   {
     label: "Notices · 1 of 6",
     title: "What QPlan does, notice by notice.",
-    body: `<p>Planning evidence for any site in England, and who it is for. Read on.</p>`,
+    body: `<p>What it can tell you about any site in England, and who it is for. Read on.</p>`,
     cover: true,
   },
   {
@@ -269,6 +302,7 @@ const CAROUSEL = `<!doctype html><html lang="en-GB"><head><meta charset="utf-8">
       await p.setViewportSize({ width: a.w, height: a.h });
       await p.setContent(a.html, { waitUntil: "networkidle" });
       await p.evaluate(() => document.fonts.ready);
+      if (a.prep) await a.prep(p);
       await p.screenshot({ path: path.join(OUT, `${a.name}.png`), clip: { x: 0, y: 0, width: a.w, height: a.h } });
       console.log("wrote", a.name);
     }

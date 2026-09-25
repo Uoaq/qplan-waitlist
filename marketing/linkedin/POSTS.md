@@ -22,10 +22,10 @@ Suggested order: one post every two or three days, starting with Post 1.
 ## Profile
 
 **Headline**
-AI solutions engineer and planning consultant · Building QPlan, planning evidence for any site in England
+AI solutions engineer and planning consultant · Building QPlan: know any site in England
 
 **About (opening lines)**
-I build QPlan: planning evidence for any site in England. It reads a site against government data, screens what the council is likely to object to, appraises feasibility and viability, and answers planning questions from pinned statute. The model writes prose and never authors a number; where the evidence is thin, it says so.
+I build QPlan, so you can know any site in England before you commit. It reads a site against government data, screens what the council is likely to object to, appraises feasibility and viability, and answers planning questions from pinned statute. The model writes prose and never authors a number; where the evidence is thin, it says so.
 
 I have been working on it since my third year at Cardiff, where my dissertation asked what it would take to use AI in planning without making planning less fair. The answer is still the rule QPlan is built on: AI should augment the planner, not replace them.
 

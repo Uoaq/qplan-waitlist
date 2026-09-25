@@ -77,7 +77,7 @@ export const HISTORY: Entry[] = [
     ref: "EPB/2026/06",
     date: "2026",
     title: "Where it is now",
-    proposal: "QPlan: planning evidence for sites in England",
+    proposal: "QPlan: know any site in England",
     decision: "In private testing",
     reason: "join the waitlist for access.",
     body: [

@@ -160,7 +160,7 @@ export function StoryFoot() {
   return (
     <footer className="site-foot">
       <QPlanMark size={24} />
-      <p>Planning evidence · England</p>
+      <p>Know any site in England</p>
       <p>
         <a className="night-link" href="mailto:hello@qplan.co.uk">hello@qplan.co.uk</a>
       </p>
