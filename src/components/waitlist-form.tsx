@@ -117,7 +117,7 @@ export function WaitlistForm() {
       )}
 
       <div className="keyed" data-invalid={emailInvalid}>
-        <label htmlFor={`${uid}-email`}>(b) Work email</label>
+        <label htmlFor={`${uid}-email`}>(b) Email</label>
         <input
           id={`${uid}-email`}
           type="email"
@@ -130,7 +130,7 @@ export function WaitlistForm() {
         />
       </div>
       {emailInvalid && (
-        <p id={`${uid}-email-err`} className="keyed__error" role="alert">(b) needs a work email we can write to.</p>
+        <p id={`${uid}-email-err`} className="keyed__error" role="alert">(b) needs an email we can write to.</p>
       )}
 
       <div className="keyed">

@@ -79,7 +79,7 @@ export const HISTORY: Entry[] = [
     title: "QPlan today",
     proposal: "QPlan: planning evidence for sites in England",
     decision: "In private testing",
-    reason: "planning consultants first in line.",
+    reason: "join the waitlist for access.",
     body: [
       "QPlan today is a different machine from that glass chat window. It screens sites in England against government data, appraises feasibility and viability, and answers planning questions from pinned statute, citing only what it has opened.",
       "Every figure comes from the data by fixed rules. The model writes the prose and never authors a number, and where the evidence is thin, it says so. That is my dissertation's conclusion, turned into software.",

@@ -20,11 +20,11 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "QPlan, planning evidence for sites in England",
   description:
-    "Site screening, feasibility appraisals, precedent evidence and a planning assistant that answers from pinned statute, for sites in England. Where the evidence is thin, QPlan says so.",
+    "Constraints, site screening, feasibility and viability appraisals, application requirements and a planning assistant that answers from pinned statute, for any site in England. Where the evidence is thin, QPlan says so.",
   openGraph: {
     title: "QPlan, planning evidence for sites in England",
     description:
-      "Site screening, feasibility appraisals, precedent evidence and a planning assistant that answers from pinned statute, for sites in England.",
+      "Constraints, site screening, feasibility and viability appraisals, application requirements and a planning assistant, for any site in England.",
     type: "website",
   },
 };

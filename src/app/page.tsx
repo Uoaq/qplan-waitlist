@@ -9,35 +9,59 @@ import { FaqItem } from "@/components/faq-item";
 // Every capability named here is live in production per the claims audit of
 // 2026-09-23; nothing unconfirmed is written (thesis T2).
 
+const WHO = [
+  {
+    lead: "Developers and housebuilders.",
+    reason:
+      "Screen a site before you offer on it, test two or three schemes for feasibility, and run a full viability appraisal with CIL, S106 and affordable housing.",
+  },
+  {
+    lead: "Landowners and land agents.",
+    reason:
+      "See what applies to your land: its title parcel, the constraints over it, its planning history, and what the council is likely to object to, before you instruct anyone.",
+  },
+  {
+    lead: "Planning consultants.",
+    reason:
+      "Answers from pinned statute with every citation checked, the requirements for 74 application types, and a screening report to start the appraisal from.",
+  },
+  {
+    lead: "Architects and designers.",
+    reason: "The constraints and designations over a site, and what the application will need, before the first sketch.",
+  },
+  {
+    lead: "Investors and lenders.",
+    reason:
+      "Residual land value tested against benchmark land value, with the sensitivity behind it and every figure traceable to its source.",
+  },
+  {
+    lead: "Homeowners.",
+    reason: "Draw your plot and see what applies to it, what an application would need, and what the fee would be.",
+  },
+];
+
+// Scope Pack and the Portfolio ranking are held back: both fail in production
+// until migration 014 is applied (capability audit, 2026-09-25).
 const LIVE = [
+  {
+    lead: "Map Explorer.",
+    reason:
+      "Search by address or coordinates, click a parcel for its registered title, or draw your own boundary. Thirty-five constraint layers, planning history with appeals matched to their applications, and the Census 2021 profile of the neighbourhood.",
+  },
+  {
+    lead: "Application requirements.",
+    reason:
+      "What will this application need? 74 application types and the requirements behind each, with links to the local validation lists of 251 of the 329 planning authorities.",
+  },
   {
     lead: "Planning assistant.",
     reason:
-      "Answers planning questions from 30 verified routes, 65 pinned statutory provisions and 28 judgments. A citation guard checks every reply, and a case that is not on the register is named, never cited.",
-  },
-  {
-    lead: "Planning fees.",
-    reason: "Worked out from the Fees Regulations themselves, not from a typed table.",
+      "Answers planning questions from 30 verified routes, 65 pinned statutory provisions and 28 judgments, and works out planning fees from the Fees Regulations themselves. A citation guard checks every reply, and a case that is not on the register is named, never cited.",
   },
   {
     lead: "Your conversations.",
     reason:
-      "Private to you and reopenable. Export a reply or a whole conversation to PDF, and upload documents, with text read from scans.",
-  },
-  {
-    lead: "Map Explorer.",
-    reason:
-      "Draw a site, or search by address or by latitude and longitude, with planning history and the Census 2021 neighbourhood profile on the map.",
-  },
-  {
-    lead: "Scope Pack.",
-    reason:
-      "From the site's constraints, the specialist disciplines to engage and what each must produce, evidenced by nearby approved schemes.",
-  },
-  {
-    lead: "Portfolio.",
-    reason:
-      "Watched sites in one ranked queue, on local approval record, nearby planning movement and value evidence. Every rate carries its sample size. QPlan Pro.",
+      "Private to you and reopenable, and exportable to PDF, one reply or the whole conversation. Document upload, with text read from scans, is a pilot on personal accounts.",
   },
 ];
 
@@ -45,12 +69,12 @@ const APPRAISALS = [
   {
     lead: "Site Screen.",
     reason:
-      "Constraint check against government datasets, with a rule-based risk score across seven dimensions, labelled as indicative, not a prediction. PDF report.",
+      "What will the council object to? Constraints and policy checked against government datasets, with a score across seven dimensions, labelled as indicative, not a prediction. The headline comes from fixed rules, never a model. PDF report.",
   },
   {
     lead: "Feasibility.",
     reason:
-      "A residual appraisal of two or three options, with sensitivity on build cost, sales value and programme. PDF and Excel.",
+      "Does the scheme make money? A residual appraisal of two or three options, with the return and sensitivity on build cost, sales value and programme. PDF and Excel.",
   },
   {
     lead: "Full Viability.",
@@ -62,7 +86,11 @@ const APPRAISALS = [
 const FAQ = [
   {
     q: "What does QPlan do?",
-    a: "It screens sites in England against government constraint data, appraises feasibility and viability, finds nearby precedent, and answers planning questions from pinned statute. Where the evidence is thin, it says so.",
+    a: "It reads a site in England against government data: its title, the constraints over it, its planning history and its neighbourhood. It screens what the council is likely to object to, appraises feasibility and viability, sets out what an application will need, and answers planning questions from pinned statute. Where the evidence is thin, it says so.",
+  },
+  {
+    q: "Who is it for?",
+    a: "Anyone deciding what to do with land in England: developers and housebuilders, landowners and land agents, planning consultants, architects, investors and lenders, and homeowners.",
   },
   {
     q: "Where does the data come from?",
@@ -74,19 +102,19 @@ const FAQ = [
   },
   {
     q: "Which Framework does it apply?",
-    a: "The National Planning Policy Framework in force from 17 August 2026. The assistant and the Site Screen check citations against that edition and mark a superseded paragraph as superseded.",
+    a: "The planning assistant answers from the National Planning Policy Framework in force from 17 August 2026, and marks a superseded paragraph as superseded.",
   },
   {
     q: "What can I export?",
-    a: "PDF for Site Screen reports, feasibility appraisals and assistant conversations; Excel for feasibility appraisals and the portfolio queue.",
+    a: "PDF for Site Screen reports, feasibility appraisals and assistant conversations; Excel for feasibility appraisals.",
   },
   {
     q: "Is QPlan a replacement for a planning consultant?",
-    a: "No. It is an evidence tool that complements professional advice. It helps consultants, developers and landowners decide faster and on better evidence, and it is not legal advice.",
+    a: "No. It is an evidence tool that complements professional advice. It helps consultants, developers, landowners and their advisers decide faster and on better evidence, and it is not legal advice.",
   },
   {
     q: "When can I use it?",
-    a: "QPlan is private while it is tested. Join the waitlist and we will write when your access is ready. Planning consultants get priority.",
+    a: "QPlan is private while it is tested. Join the waitlist and we will write when your access is ready.",
   },
 ];
 
@@ -101,6 +129,7 @@ export default function Home() {
           <QPlanMark size={28} />
         </Link>
         <div className="site-nav__links">
+          <a className="night-link" href="#who">Who it is for</a>
           <a className="night-link" href="#live">What is live</a>
           <a className="night-link" href="#inspect">You may inspect</a>
           <a className="night-link" href="#applies">Where it applies</a>
@@ -118,7 +147,7 @@ export default function Home() {
           <QPlanMark size={96} load />
           <p className="hero__tag">Planning evidence for England</p>
           <p className="hero__sub">
-            Site screening, feasibility and precedent evidence for sites in England, keyed to what is live today.
+            Constraints, appraisals, application requirements and planning answers for any site in England.
           </p>
         </div>
 
@@ -126,8 +155,8 @@ export default function Home() {
           <p className="notice__label">Notice · QPlan · England</p>
           <h1 id="hero-title">Know your site before you commit.</h1>
           <p style={{ marginBottom: "var(--s-5)" }}>
-            <b>I give notice that</b> QPlan screens sites in England against government datasets, and cites
-            nothing it has not opened.
+            <b>I give notice that</b> QPlan reads any site in England against government data, tests what could be
+            built there, and cites nothing it has not opened.
           </p>
           <WaitlistForm />
         </section>
@@ -136,6 +165,22 @@ export default function Home() {
       {/* The board: notices pinned at different sizes, never three equal cards. */}
       <main className="board" id="notices">
         <p className="board__title">Notices</p>
+
+        <section className="notice pin pin--who" id="who" aria-labelledby="n0">
+          <p className="notice__label">Notice to all interested parties</p>
+          <h2 id="n0">Not only for planners</h2>
+          <p style={{ marginBottom: "var(--s-5)" }}>
+            Anyone deciding what to do with land in England can use QPlan. It puts the evidence in front of you
+            before you spend money on a site.
+          </p>
+          <div className="who">
+            {WHO.map((c) => (
+              <p className="claim" key={c.lead}>
+                <b>{c.lead}</b> {c.reason}
+              </p>
+            ))}
+          </div>
+        </section>
 
         <section className="notice pin pin--live" id="live" aria-labelledby="n1">
           <p className="notice__label">Notice 1</p>
@@ -154,7 +199,7 @@ export default function Home() {
             <li>the statutory provisions and judgments behind every assistant reply;</li>
             <li>the sample size behind every rate. Where it is too small, the answer says so rather than scoring zero;</li>
             <li>the council page each precedent came from. QPlan cites none it did not open;</li>
-            <li>the Framework in force: the NPPF of 17 August 2026.</li>
+            <li>the Framework the assistant answers from: the NPPF of 17 August 2026.</li>
           </ol>
           <p style={{ marginTop: "var(--s-4)" }}>
             Figures come from the data. The model writes prose and never authors a number.
